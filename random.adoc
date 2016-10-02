@@ -1,0 +1,7 @@
+TO DO:
+
+9/25
+put modal in login.hbs
+http://stackoverflow.com/questions/31390886/load-bootstrap-modal-from-seperate-page-on-button-click
+
+install pg-native

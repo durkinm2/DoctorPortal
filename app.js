@@ -5,11 +5,48 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var pgp = require('pg-promise');
+var pg = require('pg').native;
+var db = pgp('postgres://localhost:5432');
+var passport = require('passport');
+//app.use(require("connect-assets")());
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+var session = require('express-session');
+
+passport.use(new LocalStrategy({
+  usernameField: 'username',
+  passwordField: 'password'
+},
+function(username, password, done) {
+  pg.connect(process.env.DATABASE_URL, function(err, client, next) {
+    if (err) {
+      return console.error("Unable to connect to database");
+    }
+    console.log("Connected to database");
+    client.query('SELECT * FROM users WHERE username = $1', [username], function(err, result) {
+      // Release client back to pool
+      next();
+      if (err) {
+        console.log("Database error");
+        return done(err);
+      }
+      if (result.rows.length > 0) {
+        var matched = bcrypt.compareSync(password, result.rows[0].password);
+        if (matched) {
+          console.log("Successful login");
+          return done(null, result.rows[0]);
+        }
+      }
+      console.log("Bad username or password");
+      return done(null, false);
+    });
+  });
+}));
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,10 +61,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', routes);
 app.use('/users', users);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

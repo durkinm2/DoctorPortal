@@ -1,2 +1,10 @@
 .lesgo p {
   color: red; }
+
+  body{
+    background-color: #ffffb3;
+  }
+header{
+    background-color: blue;
+    margin-top: 0;
+  }
