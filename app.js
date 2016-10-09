@@ -1,13 +1,12 @@
 var express = require('express');
-var sass = require('node-sass');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var pgp = require('pg-promise');
-var pg = require('pg').native;
-var db = pgp('postgres://localhost:5432');
+var pgp = require('pg-promise')();
+require('dotenv').config();
+
 var passport = require('passport');
 //app.use(require("connect-assets")());
 var routes = require('./routes/index');
@@ -17,12 +16,25 @@ var app = express();
 
 var session = require('express-session');
 
+var bcrypt = require('bcryptjs');
+var pg = require('pg').native;
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
+
+// alternative:
+// var cn = "postgres://username:password@host:port/database";
+var cn = "postgres://postgres:admin1@localhost:5432/postgres"
+var db = pgp(cn); // database instance;
+
 passport.use(new LocalStrategy({
   usernameField: 'username',
   passwordField: 'password'
 },
+
 function(username, password, done) {
-  pg.connect(process.env.DATABASE_URL, function(err, client, next) {
+  //pg.connect(process.env.DATABASE_URL, function(err, client, next) {
+  pg.connect("postgres://postgres:admin1@localhost:5432/postgres", function(err, client, next) {
     if (err) {
       return console.error("Unable to connect to database");
     }
@@ -47,6 +59,26 @@ function(username, password, done) {
   });
 }));
 
+// Store user information into session
+passport.serializeUser(function(user, done) {
+  return done(null, user.id);
+});
+
+// Get user information out of session
+passport.deserializeUser(function(id, done) {
+//pg.
+  pg.connect("postgres://postgres:admin1@localhost:5432/postgres", function(err, client, next) {
+    client.query('SELECT id, username FROM users WHERE id = $1', [id], function(err, result) {
+      next();
+      // Return the user
+      if (result) {
+        return done(null, result.rows[0]);
+      }
+      return done(null, false);
+    });
+  });
+});
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -60,6 +92,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  proxy: true,
+  secret: 'shaolin',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: app.get('env') === 'production' }
+}));
 
 app.use(passport.initialize());
 app.use(passport.session());
