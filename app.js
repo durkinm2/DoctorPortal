@@ -4,28 +4,23 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var pgp = require('pg-promise')();
-require('dotenv').config();
-
 var passport = require('passport');
-//app.use(require("connect-assets")());
+var dotenv = require('dotenv');
+dotenv.load();
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
+var queries = require('./routes/queries');
 var app = express();
 
-var session = require('express-session');
+require('dotenv').load();
 
+var session = require('express-session');
 var bcrypt = require('bcryptjs');
 var pg = require('pg').native;
+
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-
-
-// alternative:
-// var cn = "postgres://username:password@host:port/database";
-var cn = "postgres://postgres:admin1@localhost:5432/postgres"
-var db = pgp(cn); // database instance;
 
 passport.use(new LocalStrategy({
   usernameField: 'username',
@@ -33,8 +28,7 @@ passport.use(new LocalStrategy({
 },
 
 function(username, password, done) {
-  //pg.connect(process.env.DATABASE_URL, function(err, client, next) {
-  pg.connect("postgres://postgres:admin1@localhost:5432/postgres", function(err, client, next) {
+  pg.connect(process.env.DATABASE_URL, function(err, client, next) {
     if (err) {
       return console.error("Unable to connect to database");
     }
@@ -46,6 +40,7 @@ function(username, password, done) {
         console.log("Database error");
         return done(err);
       }
+
       if (result.rows.length > 0) {
         var matched = bcrypt.compareSync(password, result.rows[0].password);
         if (matched) {
@@ -58,16 +53,15 @@ function(username, password, done) {
     });
   });
 }));
-
 // Store user information into session
 passport.serializeUser(function(user, done) {
+
   return done(null, user.id);
 });
 
 // Get user information out of session
 passport.deserializeUser(function(id, done) {
-//pg.
-  pg.connect("postgres://postgres:admin1@localhost:5432/postgres", function(err, client, next) {
+  pg.connect(process.env.DATABASE_URL, function(err, client, next) {
     client.query('SELECT id, username FROM users WHERE id = $1', [id], function(err, result) {
       next();
       // Return the user
@@ -86,7 +80,7 @@ app.set('view engine', 'hbs');
 
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -94,7 +88,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   proxy: true,
-  secret: 'shaolin',
+  secret: 'web-portal',
   resave: false,
   saveUninitialized: true,
   cookie: { secure: app.get('env') === 'production' }
@@ -103,9 +97,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 app.use('/', routes);
 app.use('/users', users);
-
+//app.use('/queries', queries);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -113,9 +108,7 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
 // error handlers
-
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
@@ -137,13 +130,26 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+/*
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+  app.use(function(err, req, res, next) {
+    res.status( err.code || 500 )
+    .json({
+      status: 'error',
+      message: err
+    });
+  });
+}
 
-//sass.render({
-//  file: "/sass/home.scss",
-  //[, options..]
-//}, function(err, result) { /*...*/ });
-// OR
-
-
-
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500)
+  .json({
+    status: 'error',
+    message: err.message
+  });
+});*/
 module.exports = app;

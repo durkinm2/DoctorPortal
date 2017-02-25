@@ -1,0 +1,120 @@
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <main class="col-sm-12 pt-3">
+
+          <div class="row">
+            <div class="col-sm-12"><h1 class="mb-3">MediBase</h1></div>
+          </div>
+
+          <div class="row text-left ml-60 mr-75 mb-60 pt-4">
+
+              <div class="col-sm-12">
+                <h4 class="pb-2">Search Criteria</h4>
+              </div>
+
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label>Brand Name</label>
+                  <input class="form-control query-input" id="query-brandname" type="" name="brand_name" placeholder="i.e. Motrin">
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label>Substance Name</label>
+                  <input class="form-control query-input" id="query-substname" type="" name="substance_name" placeholder="i.e. Ibuprofen">
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="mb-3">
+                  <label>Manufacturer Name</label>
+                  <input class="form-control query-input" id="query-manufacname" type="" name="manufacturer_name" placeholder="i.e. CVS Pharmacy">
+                </div>
+              </div>
+
+              <div class="col-sm-12">
+                <div class="input-group" style="width: 255px;">
+                  <span class="input-group-addon" id="basic-addon1">Limit:</span>
+                  <input class="form-control" type="text" name="" id="query-results-limit" value="5">
+                  <button class="btn btn-primary ml-3" id="query-search"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                </div>
+              </div>
+
+              <div class="col-sm-12">
+                <small id="query-results-limit-label"></small>
+              </div>
+
+              <div class="col-sm-12 mt-20">
+                <hr><h4 class="pb-4 mt-30" id="query-results-label">Results Shown</h4>
+              </div>
+
+              <div class="col-sm-12">
+                <div class="container-fluid" id="results-container">
+                  <h5 class="text-center mt-40" id="query-statustext">Powered by OpenFDA.</h5>
+                </div>
+              </div>
+
+          </div>
+
+        </main>
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="query-modal" tabindex="-1" role="dialog" aria-labelledby="query-modal-label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="query-modal-label">Medication Name</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <form>
+
+              <div class="form-group">
+                <label for="message-text" class="form-control-label" id="query-result-purpose"></label>
+              </div>
+
+              <div class="form-group">
+                <label for="message-text" class="form-control-label" id="query-result-usage"></label>
+              </div>
+
+              <div class="form-group">
+                <label for="message-text" class="form-control-label" id="query-result-substance"></label>
+              </div>
+
+              <div class="form-group">
+                <label for="message-text" class="form-control-label" id="query-result-manufacturer"></label>
+              </div>
+
+              <hr>
+
+              <div class="form-group">
+                <label for="message-text" class="form-control-label" id="query-result-type"></label>
+              </div>
+
+              <div class="form-group">
+                <label for="message-text" class="form-control-label" id="query-result-route"></label>
+              </div>
+
+              <div class="form-group">
+                <label for="message-text" class="form-control-label" id="query-result-prodndc"></label>
+              </div>
+
+            </form>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban" aria-hidden="true"></i> Close</button>
+          </div>
+
+        </div>
+      </div>
+    </div>

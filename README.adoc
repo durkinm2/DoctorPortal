@@ -1,0 +1,21 @@
+todo:
+- setup openfda
+- get user pages working
+-- erase placeholder data
+- add email to users table
+- put password req's and re-type match code in /users
+
+thoughts:
+- create separate table for unique patient id's .. in /users: check table and if exists, recycle id. OR expire after xx time.
+
+
+done
+-set home redirect to login
+-created admin user
+
+
+todo
+- create functions for create/delete patients
+  -- find time stamp
+- store openfda json in db
+- fix single patient function

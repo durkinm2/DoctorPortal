@@ -1,0 +1,59 @@
+{
+	"data": [{
+	        "id": 1,
+	        "first-name": "James",
+	        "last-name": "Salvatore",
+	        "medication": "Tylenol",
+	        "create-date": "1/23/2017"
+    	},
+    	{
+	        "id": 1,
+	        "first-name": "James",
+	        "last-name": "Salvatore",
+	        "medication": "Ibuprofin",
+	        "create-date": "1/30/2017"
+		},
+		{
+	        "id": 2,
+	        "first-name": "Jane",
+	        "last-name": "Goodall",
+	        "medication": "Motrin",
+	        "create-date": "2/1/2017"
+		},
+		{
+	        "id": 3,
+	        "first-name": "Alex",
+	        "last-name": "Jones",
+	        "medication": "Aleve",
+	        "create-date": "12/13/2016"
+		},
+		{
+	        "id": 4,
+	        "first-name": "Steven",
+	        "last-name": "Toozer",
+	        "medication": "Motrin",
+	        "create-date": "8/4/2016"
+		},
+		{
+	        "id": 5,
+	        "first-name": "Robert",
+	        "last-name": "McCain",
+	        "medication": "Sudafed",
+	        "create-date": "10/31/2016"
+		},
+		{
+	        "id": 5,
+	        "first-name": "Robert",
+	        "last-name": "McCain",
+	        "medication": "Tylenol",
+	        "create-date": "10/31/2016"
+		},
+		{
+	        "id": 5,
+	        "first-name": "Robert",
+	        "last-name": "McCain",
+	        "medication": "Mucinex",
+	        "create-date": "10/31/2016"
+		}
+	]
+}

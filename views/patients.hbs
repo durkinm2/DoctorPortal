@@ -1,0 +1,42 @@
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <main class="col-sm-12 pt-3">
+
+          <h1 style="border-bottom: 1px solid #eee; margin-bottom: 20px; padding-bottom: 9px">Patients for <span>{{user.username}}</span></h1>
+          <div class="table-responsive" style="margin-bottom: 30px;">
+            <table id="table-patient-instances" data-toggle="table" class="dp-table-modal"
+             data-pagination="true"
+             data-search="true"
+             data-url="/users/api/patients"
+             data-show-refresh="true"
+             data-show-columns="true"
+             data-sort-name="first-name"
+             data-sort-order="desc"
+             data-toolbar="#toolbar">
+              <thead>
+                <tr>
+                    <th data-field="pat_id"
+                        data-sortable="true">
+                            patient ID
+                    </th>
+                    <th data-field="fname"
+                        data-sortable="true">
+                            First Name
+                    </th>
+                    <th data-field="lname"
+                        data-sortable="true">
+                            Last Name
+                    </th>
+                    <th data-field="contact"
+                        data-sortable="true">
+                            Contact
+                    </th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </main>
+      </div>
+    </div>

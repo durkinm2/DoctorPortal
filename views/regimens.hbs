@@ -1,0 +1,134 @@
+
+    <div class="container-fluid">
+      <div class="row pt-3">
+          <div class="col-sm-12">
+            <h1>Regimens <span>for John Smith</span></h1>
+          </div>
+      </div>
+
+      <div class="row">
+        <main class="col-sm-12">
+
+          <div class="container-fluid ml-50 mr-50 mt-40">
+
+            <div class="row mb-3">
+              <a class="btn btn-primary" style="color: white; cursor: pointer; margin-left: 15px;"><i class="fa fa-plus"></i> Create New</a>
+            </div>
+
+            <hr>
+
+            <div class="row text-center">
+              <div class="col-sm-4">
+                <div class="card card-report card-clickable regimen-instance">
+                  <div class="card-block">
+                    <h3 class="card-title pb-2">Medication Name</h3>
+                    <hr>
+                    <p>Create Date</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="card card-report card-clickable regimen-instance">
+                  <div class="card-block">
+                    <h3 class="card-title pb-2">Medication Name</h3>
+                    <hr>
+                    <p>Create Date</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="card card-report card-clickable regimen-instance">
+                  <div class="card-block">
+                    <h3 class="card-title pb-2">Medication Name</h3>
+                    <hr>
+                    <p>Create Date</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <div class="modal fade" id="editRegimen-modal" tabindex="-1" role="dialog" aria-labelledby="editRegimen-modal-label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="editRegimen-modal-label"><i class="fa fa-user" aria-hidden="true"></i> Patient Name</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="medication-name" class="form-control-label">Medication:</label>
+                      <input type="text" class="form-control" id="medication-name" placeholder="Current Med">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="message-text" class="form-control-label">Time Slots:</label>
+
+                      <div class="row">
+                        <div class="col-sm-3 mr-neg-20">
+                          <button class="btn btn-primary btn-sm btn-addtime"><i class="fa fa-plus"></i> Add Time</button>
+                        </div>
+
+                        <div class="col-sm-4">
+                          <div class="input-group input-group-sm">
+                            <div class="input-group-btn">
+                              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-cog" aria-hidden="true"></i>
+                              </button>
+                              <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Edit</a>
+                                <div role="separator" class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Delete</a>
+                              </div>
+                            </div>
+                            <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="8:00 AM">
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="input-group date" id="editRegimen-datepicker">
+                            <input type="text" class="form-control" placeholder="End Date">
+                            <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="dropdownMenuButton" class="form-control-label">Recurrences:</label>
+                      <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          None
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#">Daily</a>
+                          <a class="dropdown-item" href="#">Weekly</a>
+                          <a class="dropdown-item" href="#">Custom</a>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</button>
+                  <button type="button" class="btn btn-success"><i class="fa fa-check-circle" aria-hidden="true"></i> Save</button>
+                </div>
+              </div>
+            </div>
+          </div>

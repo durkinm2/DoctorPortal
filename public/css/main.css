@@ -1,0 +1,161 @@
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+}
+
+h1 {
+  margin-bottom: 20px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #eee;
+}
+
+
+/* global badge styling */
+.badge {
+	font-size: 1rem;
+	color: white;
+	width: 24px;
+	border-radius: 50%;
+}
+
+/* bootstrap color copies */
+.bs-blue {
+	background-color: #0275D8; /* btn-primary color*/
+}
+
+.bs-red {
+	background-color: #D9534F; /* btn-danger color*/
+}
+
+/* global card styling */
+.card {
+	background-color: #f6f6f6;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+	transition: .15s ease-in-out;
+}
+
+.card-clickable:hover {
+	cursor: pointer;
+	background-color: #e3e3e3;
+	border-color: #e3e3e3;
+}
+
+/* index.html (notifiaction cards) */
+.card-notification {
+	padding-top: 15px !important;
+	padding-bottom: 15px !important;
+	height: 3.5rem;
+}
+
+/* patientProfile.html */
+.card-patient-profile {
+	height: 25.6rem;
+}
+
+.card-query-result {
+	margin-top: 3px;
+	margin-bottom: 3px;
+	border: 8px solid #f6f6f6;
+	-webkit-box-shadow: 0 10px 6px -6px #777;
+   -moz-box-shadow: 0 10px 6px -6px #777;
+        box-shadow: 0 10px 6px -6px #777;
+	margin-left: -12px;
+	margin-right: -12px;
+	border-radius: 0px;
+}
+
+.card-query-result p {
+	font-size: 12px;
+	margin-bottom: 4px;
+}
+
+/* patients.html (table) */
+.dp-table-modal {
+  cursor: pointer;
+}
+
+/* custom margin adjustments */
+.ml-60 {
+	margin-left: 60px;
+}
+
+.mr-50 {
+	margin-right: 50px;
+}
+
+.mr-40 {
+	margin-right: 40px;
+}
+
+.ml-75 {
+	margin-left: 75px;
+}
+
+.mr-75 {
+	margin-right: 75px;
+}
+
+.mt-75 {
+	margin-top: 75px;
+}
+
+.mt-40 {
+	margin-top: 40px;
+}
+
+.mt-50 {
+	margin-top: 50px;
+}
+
+.mt-20 {
+	margin-top: 20px;
+}
+
+.mt-30 {
+	margin-top: 25px;
+}
+
+.mb-60 {
+	margin-bottom: 60px;
+}
+
+/* medibase.html */
+#medi-query-results {
+	border: 1px solid #eee;
+	max-height: 500px;
+}
+
+.pl-0 {
+	padding-left: 0px;
+}
+
+.pr-0 {
+	padding-right: 0px;
+}
+
+.query-result-field {
+	display: inline-block;
+}
+
+#query-results-label {
+	display: none;
+}
+
+#query-statustext {
+	color: #dedede;
+}
+
+#results-container {
+	min-height: 100px;
+}
+
+#query-results-limit {
+	width: 12px !important;
+	border-top-right-radius: 0.25em;
+	border-bottom-right-radius: 0.25em;
+}
+
+#query-results-limit-label {
+	color: #AF2020;
+}

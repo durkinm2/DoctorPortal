@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>DoctorPortal - Dashboard</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/dist/css/bootstrap/bootstrap.css" rel="stylesheet">
+
+    <link href="/dist/css/bootstrap/bootstrap-table.min.css" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link href="/dist/css/font-awesome/font-awesome.css" rel="stylesheet" type="text/css">
+
+    <!-- Main stlying (James) -->
+    <link href="/css/main.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+      <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbar-main-top" aria-controls="navbar-main-top" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <a class="navbar-brand" href="#"><i class="fa fa-heartbeat fa-1x mr-1" aria-hidden="true" style="color: #0098D5;"></i>DoctorPortal</a>
+
+      <div class="collapse navbar-collapse" id="navbar-main-top">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="profile">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link  mr-sm-2" href="#">Settings</a>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav">
+          <li>
+            <a class="nav-link" href="#"><i class="fa fa-user-md fa-1x mr-2" aria-hidden="true"></i>{{user.username}}</a>
+          </li>
+        </ul>
+
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <main class="col-sm-12 pt-3">
+
+          <div class="row">
+            <div class="col-sm-12"><h1 class="mb-3">Home</h1></div>
+          </div>
+
+          <div class="container-fluid ml-50 mr-50">
+            <div class="row">
+              <div class="col-sm-12"><h2 class="pt-3 mb-3">Notifications</h2></div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="card card-clickable mb-3 text-left">
+                  <div class="card-block card-notification">
+                  <p>New Patients <span class=" pull-right badge bs-blue">3</span></p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="card card-clickable mb-3 text-left">
+                  <div class="card-block card-notification">
+                  <p>Inquiries <span class=" pull-right badge bs-red">5</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-5">
+              <hr>
+            </div>
+
+            <div class="row mt-4">
+              <div class="col-sm-12"><h2 class="pt-3 mb-3">Actions</h2></div>
+            </div>
+
+            <div class="row text-center">
+              <div class="col-sm-4">
+                <div class="card card-clickable" id="action-patients">
+                  <div class="card-block">
+                    <h3 class="card-title pb-2">Patients</h3>
+                    <i class="fa fa-address-book-o fa-5x pb-3" aria-hidden="true"></i>
+                    <hr>
+                    <ul class="text-left">
+                      <li>View your Patients</li>
+                      <li>Create / Edit regimens</li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-sm-4">
+                <div class="card card-clickable">
+                  <div class="card-block">
+                    <h3 class="card-title pb-2">MediBase</h3>
+                    <i class="fa fa-search fa-5x pb-3" aria-hidden="true"></i>
+                    <hr>
+                    <ul class="text-left">
+                      <li>Search the Medication Database</li>
+                      <li>View any medication's notes</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="card card-clickable">
+                  <div class="card-block">
+                    <h3 class="card-title pb-2">Settings</h3>
+                    <i class="fa fa-cog fa-5x pb-3" aria-hidden="true"></i>
+                    <hr>
+                    <ul class="text-left">
+                      <li>Customize your Portal layout</li>
+                      <li>Edit your notification system</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="/dist/js/jquery/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <script src="/dist/js/bootstrap/bootstrap.js"></script>
+    <script src="/dist/js/bootstrap/bootstrap-table.js" type="text/javascript"></script>
+
+    <script src="/james_js/index.js" type="text/javascript"></script>
+  </body>
+</html>
