@@ -33,7 +33,7 @@ function createResultCard(result) {
 	var substanceName = result.openfda.substance_name ? result.openfda.substance_name : 'None';
 	var manufacturerName = result.openfda.manufacturer_name ? result.openfda.manufacturer_name : 'None';
 
-	var resultCard = '<div class="card card-clickable card-query-result text-left mb-3 effect-7"><div class="card-block"><h5 class="card-title">' + brandName
+	var resultCard = '<div class="card card-clickable card-query-result text-left"><div class="card-block"><h5 class="card-title">' + brandName
 	+ '</h5><p>Substance: ' + substanceName + '</p><p>Manufacturer: ' + manufacturerName + '</p></div></div>';
 
 	return resultCard;
@@ -53,7 +53,7 @@ function displayQueryResults(data) {
 	$('.card-query-result').click(function(){
 		$('#query-modal').modal();
 		var query_index = $('.card-query-result').index(this);
-		updateResultModal(currentResults[query_index]);
+		showResultContent(currentResults[query_index]);
 	});
 }
 
@@ -76,7 +76,7 @@ function getLimitCount() {
 		}
 		if ($('#query-results-limit-label').is(':visible')) $('#query-results-limit-label').hide();
 		return "&limit=" + resultLimit.toString();
-	} else { 
+	} else {
 		$('#query-results-limit-label').html('Invalid limit value').show();
 		return;
 	}
@@ -84,14 +84,14 @@ function getLimitCount() {
 
 /**
 * Adds all of the entered fields from the input menu into the API query url.
-*/ 
+*/
 function getURLAddons() {
 	var count_queryCriteria = 0;
 	var url_query_addons = '';
 
 	$('.query-input').each(function() {
 		if (this.value !== '') {
-			if (count_queryCriteria > 0) url += "+AND+";
+			if (count_queryCriteria > 0) url_query_addons += "+AND+";
 			url_query_addons += "openfda." + this.name + ":" + this.value;
 			count_queryCriteria ++;
 		}
@@ -106,7 +106,10 @@ function getURLAddons() {
 */
 function openFDARequest(url) {
 	$('#query-statustext').html('<i class="fa fa-refresh fa-spin fa-2x fa-fw"></i><span class="sr-only">Loading...</span>');
+	console.log(url);
 	$.getJSON(url, function(data) {
+		console.log('rad');
+		console.log(data);
 		currentResults = data.results;
 		clearResults();
 		displayQueryResults(data);
@@ -139,9 +142,9 @@ function searchMediBase() {
 }
 
 /**
-* Updates the modal window fields for the currently selected query result.
+* Shows a modal window with the info. of the currently selected query result.
 */
-function updateResultModal(result) {
+function showResultContent(result) {
 	if (result.openfda.brand_name) $('#query-modal-label').html(result.openfda.brand_name);
 
 	if (result.purpose) {
@@ -152,7 +155,7 @@ function updateResultModal(result) {
 		}
 		$('#query-result-purpose').html('<b>Purpose: </b>' + purposeStrList.join(' '));
 	}
-	
+
 	if (result.indications_and_usage) {
 		var usageStrList = result.indications_and_usage[0].split(' ');
 		if (usageStrList[0].toLowerCase() == 'uses') {
@@ -170,6 +173,3 @@ function updateResultModal(result) {
 	if (result.openfda.route) $('#query-result-route').html('<b>Route: </b>' + result.openfda.route);
 	if (result.openfda.product_ndc) $('#query-result-prodndc').html('<b>Product NDC: </b>' + result.openfda.product_ndc);
 }
-
-
-

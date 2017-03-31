@@ -26,21 +26,21 @@
                         data-sortable="true">
                             Username
                     </th>
-                    <th data-field="account_active"
+                    <th data-field="acct_active"
                         data-sortable="true">
                             Active
                     </th>
-                    <th data-field="first-name"
+                    <th data-field="fname"
                         data-sortable="true">
                             First Name
                     </th>
-                    <th data-field="last-name"
+                    <th data-field="lname"
                         data-sortable="true">
                             Last Name
                     </th>
-                    <th data-field="create-date"
+                    <th data-field="active"
                         data-sortable="true">
-                            Creation Date
+                            Joined
                     </th>
                 </tr>
               </thead>
@@ -66,12 +66,12 @@
                     <div class="form-group">
                       <label for="dropdownMenuButton" class="form-control-label">Account Status:</label>
                       <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="account-status-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Current Status
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item" href="#">Yes</a>
-                          <a class="dropdown-item" href="#">No</a>
+                          <li><a class="dropdown-item" id="select-active">Active</a></li>
+                          <li><a class="dropdown-item" id="select-notactive">Not Active</a></li>
                         </div>
                       </div>
                     </div>
@@ -79,8 +79,8 @@
                 </div>
 
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</button>
-                  <button type="button" class="btn btn-success"><i class="fa fa-check-circle" aria-hidden="true"></i> Save</button>
+                  <button type="button" class="btn btn-danger" id="modal-accountstatus-cancel" data-dismiss="modal"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</button>
+                  <button type="button" class="btn btn-success" id="modal-accountstatus-save"><i class="fa fa-check-circle" aria-hidden="true"></i> Save</button>
                 </div>
               </div>
             </div>

@@ -2,7 +2,7 @@
 
     <div class="container-fluid">
       <div class="row pt-3">
-        <div class="col-sm-12"><h1>Patient Profile</h1></div>
+        <div class="col-sm-12"><h1>{{{title}}}</h1></div>
       </div>
 
       <div class="row">
@@ -13,19 +13,20 @@
 
             <div class="row mt-4"></div>
 
+
             <div class="row text-center">
               <div class="col-sm-8">
                 <div class="card card-patient-profile">
-                  <h3 class="card-header patient-name">John Smith</h3>
+                  <h3 class="card-header patient-name">{{fname}} {{lname}}</h3>
                   <div class="card-block">
                     <!-- <h3 class="card-title pb-2" style="background-color: red">John Smith</h3> -->
                     <i class="fa fa-user fa-5x pb-3" aria-hidden="true"></i>
                     <hr>
                     <h5 class="text-left">Contact</h5>
                     <div class="text-left ml-2">
-                      <span>Email: </span><br>
-                      <span>Phone: </span><br>
-                      <span>Address: </span>
+                      <span>Email: {{email}}</span><br>
+                      <span>Phone: {{phone}}</span><br>
+                      <span>Address: {{address}}</span>
                     </div>
                   </div>
                 </div>
@@ -37,15 +38,16 @@
                     <h3 class="card-title pb-2">Regimens</h3>
                     <i class="fa fa-medkit fa-2x pb-3" aria-hidden="true"></i>
                     <hr>
-                    <span>Manage regimens for <span>John</span></span>
+                    <span>Manage regimens for <span>{{fname}}</span></span>
                   </div>
                 </div>
+
                 <div class="card card-clickable mt-3" id="patient-reports">
                   <div class="card-block">
                     <h3 class="card-title pb-2">Reports</h3>
                     <i class="fa fa-book fa-2x pb-3" aria-hidden="true"></i>
                     <hr>
-                    <span>Generate reports for <span>John</span></span>
+                    <span>Generate reports for <span>{{fname}}</span></span>
                   </div>
                 </div>
               </div>

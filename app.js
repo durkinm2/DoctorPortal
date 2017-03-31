@@ -4,13 +4,16 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var passport = require('passport');
 var dotenv = require('dotenv');
 dotenv.load();
 
+var massive = require("massive");
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var queries = require('./routes/queries');
+
+var connectionString = process.env.DATABASE_URL + "?ssl=true";
+var massiveInstance = massive.connectSync({connectionString : connectionString});
+
 var app = express();
 
 require('dotenv').load();
@@ -22,7 +25,7 @@ var pg = require('pg').native;
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-passport.use(new LocalStrategy({
+passport.use( new LocalStrategy({
   usernameField: 'username',
   passwordField: 'password'
 },
@@ -33,14 +36,18 @@ function(username, password, done) {
       return console.error("Unable to connect to database");
     }
     console.log("Connected to database");
-    client.query('SELECT * FROM users WHERE username = $1', [username], function(err, result) {
+      client.query('SELECT * FROM users WHERE username = $1', [username], function(err, result) {
       // Release client back to pool
       next();
+
       if (err) {
         console.log("Database error");
         return done(err);
       }
-
+      if (!result.rows[0].acct_active) {
+        console.log("Account not activated");
+        return done(err);
+      }
       if (result.rows.length > 0) {
         var matched = bcrypt.compareSync(password, result.rows[0].password);
         if (matched) {
@@ -48,11 +55,15 @@ function(username, password, done) {
           return done(null, result.rows[0]);
         }
       }
+
       console.log("Bad username or password");
       return done(null, false);
     });
+
   });
 }));
+
+
 // Store user information into session
 passport.serializeUser(function(user, done) {
 
@@ -72,7 +83,6 @@ passport.deserializeUser(function(id, done) {
     });
   });
 });
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -97,10 +107,10 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 app.use('/', routes);
 app.use('/users', users);
-//app.use('/queries', queries);
+
+app.set('db', massiveInstance);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -121,16 +131,6 @@ if (app.get('env') === 'development') {
   });
 }
 
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
-});
-/*
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
@@ -151,5 +151,5 @@ app.use(function(err, req, res, next) {
     status: 'error',
     message: err.message
   });
-});*/
+});
 module.exports = app;

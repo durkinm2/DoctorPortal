@@ -19,3 +19,25 @@ todo
   -- find time stamp
 - store openfda json in db
 - fix single patient function
+
+
+todo
+- consider subapps for admin and api
+- 1. use hbs and only send id
+- 2. append using ajax
+
+todo:
+- get row value
+-
+// all active users
+db.users.find({active: true}, function(err, users){
+  // all users who are active
+});
+
+testing:
+-when update regimen med_name, need to reload page
+-whole top navbar clickable
+-login page accessible when already logged in
+-/patients can't click table filter icon
+-doc name only shows in navbar when on /profile (hbs helper)
+-fix dates in admin pages
