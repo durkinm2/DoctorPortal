@@ -84,9 +84,9 @@ function getAllRegimens(req, res, next) {
 }
 
 function upsertRegimen(req, res, next){
-  var card = req.body.regimen;
+  var card= req.body.regimen;
   var pat = parseInt(req.params.pat_id);
-  var card_id = req.body.card_id;
+  var card_id = req.body.test2;
   console.log(card_id,"cardid", card);
 
   if (card_id) {
@@ -105,10 +105,12 @@ function upsertRegimen(req, res, next){
         console.log("Could not create card");
       } else {
         console.log("Card successfully created");
-        res.json(result);
+              console.log("after", result, card);
+              res.json(result);
       }
     });
   }
+
 
 }
 
