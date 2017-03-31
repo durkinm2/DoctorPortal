@@ -1,0 +1,15 @@
+{
+	"data": [{
+	        "id": 6,
+	        "first-name": "Albert",
+	        "last-name": "Smith",
+	        "create-date": "2/2/2017"
+    	},
+    	{
+	        "id": 7,
+	        "first-name": "Jordan",
+	        "last-name": "Thomas",
+	        "create-date": "1/31/2017"
+		}
+	]
+}

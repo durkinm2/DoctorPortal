@@ -1,0 +1,134 @@
+
+<div class="container-fluid">
+  <div class="row pt-3">
+      <div class="col-sm-12">
+        <h1>Regimens <span>for John Smith</span></h1>
+      </div>
+  </div>
+
+  <div class="row">
+    <main class="col-sm-12">
+
+      <div class="container-fluid ml-50 mr-50 mt-40">
+
+        <div class="row mb-neg-10">
+          <div class="col-sm-6 regimen-label">Current Regimens</div>
+          <div class="col-sm-6"><a class="btn btn-primary float-right" id="create-new-regimen" style="color: white; cursor: pointer; margin-left: 15px;"><i class="fa fa-plus"></i> Create New</a></div>
+        </div>
+
+        <hr>
+
+        <div class="container-fluid text-center">
+          <h5 class="h-statustext" id="regimen-statustext-current"></h5>
+          <div class="row text-center" id="regimen-row-current"></div>
+        </div>
+
+        <div class="row mb-neg-10">
+          <div class="col-sm-12 regimen-label">Past Regimens</div>
+        </div>
+
+        <hr>
+
+        <div class="container-fluid text-center">
+          <h5 class="h-statustext" id="regimen-statustext-past"></h5>
+          <div class="row text-center" id="regimen-row-past"></div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+    <div class="modal fade" id="regimen-modal" tabindex="-1" role="dialog" aria-labelledby="regimen-modal-label" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="regimen-modal-label"><i class="fa fa-user" aria-hidden="true"></i> Patient Name</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <label for="medication-name" class="form-control-label">Medication:</label>
+                    <input type="text" class="form-control" id="medication-name" placeholder="i.e. Advil">
+                  </div>
+
+                  <div class="col-sm-4">
+                    <label class="form-control-label">Start Date:</label>
+                    <div class="input-group date regimen-datepicker" id="regimen-datepicker-startdate">
+                      <input type="text" class="form-control regimen-datepicker-input" placeholder="Select Date" readonly>
+                      <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4">
+                    <label class="form-control-label">End Date:</label>
+                    <div class="input-group date regimen-datepicker" id="regimen-datepicker-enddate">
+                      <input type="text" class="form-control regimen-datepicker-input" placeholder="Select Date" readonly>
+                      <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="form-group mt-3">
+          <label class="form-control-label">Time Slots:</label>
+
+          <div id="regimen-modal-weekschema-container"></div>
+
+        </div>
+
+        <div class="form-group mt-3">
+          <label class="form-control-label">Dosage Instructions:</label>
+
+          <div id="regimen-modal-dosage">
+            <input id="dosage-instructions" type="text" class="form-control" maxlength="50">
+          </div>
+
+        </div>
+
+              <div class="form-group mt-3">
+                <label class="form-control-label">Time Slots:</label>
+
+                <div id="regimen-modal-weekschema-container"></div>
+
+              </div>
+
+            </form>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</button>
+            <button type="button" class="btn btn-success" id="regimen-modal-save"><i class="fa fa-check-circle" aria-hidden="true"></i> Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h5 class="modal-title">Are you sure you want to delete this regimen?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body">
+                Are you sure you want to delete this regimen?
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</button>
+                <button type="button" class="btn btn-danger" id="delete-modal-delete"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>

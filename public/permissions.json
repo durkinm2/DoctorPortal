@@ -1,0 +1,18 @@
+{
+  "GET": {
+    "/needsspecficroles": {
+      "roles": ["user", "admin"]
+    },
+    "/open": {
+       "roles": null
+    },
+    "/needsauthentication": {
+        "roles": []
+    }
+  },
+  "POST": {
+    "/helloworld": {
+      "roles": ["admin"]
+    }
+  }
+}

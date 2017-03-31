@@ -1,0 +1,383 @@
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+}
+
+h1 {
+  margin-bottom: 20px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #eee;
+}
+
+
+/* global badge styling */
+.badge {
+	font-size: 1rem;
+	color: white;
+	width: 24px;
+	border-radius: 50%;
+}
+
+/* bootstrap color copies */
+.bs-blue {
+	background-color: #0275D8; /* btn-primary color*/
+}
+
+.bs-red {
+	background-color: #D9534F; /* btn-danger color*/
+}
+
+.btn-xs {
+	font-size: 10px;
+	width: 60px;
+}
+
+/* global card styling */
+.card {
+	background-color: #f6f6f6;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+	transition: .15s ease-in-out;
+}
+
+.card-clickable:hover {
+	cursor: pointer;
+	background-color: #e3e3e3;
+	border-color: #e3e3e3;
+}
+
+/* index.html (notifiaction cards) */
+.card-notification {
+	padding-top: 15px !important;
+	padding-bottom: 15px !important;
+	height: 3.5rem;
+}
+
+/* patientProfile.html */
+.card-patient-profile {
+	height: 25.6rem;
+}
+
+.card-query-result {
+	/*margin-top: 3px;*/
+	/*margin-bottom: 3px;*/
+	/*border: 8px solid #f6f6f6;
+	-webkit-box-shadow: 0 10px 6px -6px #777;
+   -moz-box-shadow: 0 10px 6px -6px #777;
+        box-shadow: 0 10px 6px -6px #777;*/
+    box-shadow: none;
+	margin-left: -12px;
+	margin-right: -12px;
+	border-radius: 0px;
+}
+
+.card-query-result p {
+	font-size: 12px;
+	margin-bottom: 4px;
+}
+
+.card-regimen-instance, .card-regimen-instance .card-title {
+	font-weight: 200;
+}
+
+/* patients.html (table) */
+.dp-table-modal {
+  cursor: pointer;
+}
+
+.h-statustext {
+	color: #cccccc;
+}
+
+/* custom margin adjustments */
+.ml-60 {
+	margin-left: 60px;
+}
+
+.mr-50 {
+	margin-right: 50px;
+}
+
+.ml-50 {
+	margin-left: 50px;
+}
+
+.mr-40 {
+	margin-right: 40px;
+}
+
+.ml-75 {
+	margin-left: 75px;
+}
+
+.mr-75 {
+	margin-right: 75px;
+}
+
+.mt-75 {
+	margin-top: 75px;
+}
+
+.mt-40 {
+	margin-top: 40px;
+}
+
+.mt-50 {
+	margin-top: 50px;
+}
+
+.mt-20 {
+	margin-top: 20px;
+}
+
+.mt-30 {
+	margin-top: 25px;
+}
+
+.mb-60 {
+	margin-bottom: 60px;
+}
+
+.mb-neg-10 {
+	margin-bottom: -10px;
+}
+
+/* medibase.html */
+#medi-query-results {
+	border: 1px solid #eee;
+	max-height: 500px;
+}
+
+.pl-0 {
+	padding-left: 0px;
+}
+
+.pr-0 {
+	padding-right: 0px;
+}
+
+.query-result-field {
+	display: inline-block;
+}
+
+#query-results-label {
+	display: none;
+}
+
+#query-results-limit {
+	width: 12px !important;
+	border-top-right-radius: 0.25em;
+	border-bottom-right-radius: 0.25em;
+}
+
+#query-results-limit-label {
+	color: #AF2020;
+}
+
+.regimen-datepicker-input {
+	background-color: white !important;
+}
+
+.regimen-datepicker-input:disabled {
+	background-color: rgb(236,238,239) !important;
+}
+
+.regimen-label {
+	font-size: 32px;
+	font-weight: 500;
+}
+
+.regimen-modal-replicate-container {
+	padding-left: 10px !important;
+	margin-bottom: 0px;
+}
+
+.regimen-modal-weekschema {
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	border-radius: 0.25em;
+	margin-left: 2px;
+	margin-right: 2px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.regimen-modal-weekschema .col {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.regimen-modal-datelabel {
+	height: 38px;
+	display: block;
+	padding-left: 1px;
+	padding-right: 1px;
+	font-size: 14px;
+	line-height: 20px;
+	text-align: center;
+	/*height: 30px;
+	padding-left: 4px;
+	padding-right: 4px;
+	font-size: 15px;
+	/*background-color: rgb(236,238,239);*/
+	/*border: 1px solid #eee;
+	border-radius: 0.25em;*/
+}
+
+.regimen-modal-timeslot-delete {
+	display: none;
+	color: white;
+	background-color: #D9534F;
+	border: 1px solid #D9534F;
+	/*border: 1px solid #eee;*/
+	/*border: 1px solid black;*/
+	/*background-color: rgb(236,238,239);*/
+	border-top-right-radius: 0.25em;
+	border-bottom-right-radius: 0.25em;
+}
+
+.regimen-modal-timeslot-delete:hover {
+	cursor: pointer;
+}
+
+.regimen-modal-warninglabel {
+	font-size: 11px;
+	color: #D9534F;
+}
+
+.regimen-modal-replicate-label {
+	vertical-align: top;
+	font-size: 14px;
+	/*color: #aaa;*/
+}
+
+#results-container {
+	min-height: 100px;
+}
+
+/*.replicate-week:disabled {
+	cursor: disabled;
+}*/
+
+
+/* ----------------------- */
+/* The regimen-modal-switch - the box around the slider */
+.regimen-modal-switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+/* Hide default HTML checkbox */
+.regimen-modal-switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(18px);
+  -ms-transform: translateX(18px);
+  transform: translateX(18px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+
+
+
+/* Close Button */
+
+.delete-regimen {
+  display: none;
+  color: #9f9f9f;
+  font: 14px/100% arial, sans-serif;
+  position: absolute;
+  right: 5px;
+  text-decoration: none !important;
+  text-shadow: 0 1px 0 #fff;
+  top: 5px;
+}
+
+.delete-regimen:hover {
+  color: #777;
+}
+
+.delete-regimen:after {
+  content: 'X'; /* UTF-8 symbol  ✖*/
+  font-weight: bolder;
+}
+
+
+/* Dialog */
+
+/*.dialog {
+  background: #ddd;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  float: left;
+  height: 200px;
+  margin: 20px;
+  position: relative;
+  width: 150px;
+
+}*/
+
+.report {
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+	padding: 2px;
+	border: 1px solid black;
+	border-radius: 0.25em;
+	margin-bottom: 30px;
+	max-height: 450px;
+}
+
+.report-table-container {
+	overflow-x: auto;
+	overflow-y: auto;
+}
+
+.report-chart-container {
+
+}
+
+.cell-fixedwidth {
+	width: 30px !important;
+}
