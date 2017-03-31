@@ -8,7 +8,6 @@ var deasync = require('deasync');
 var roleType;
 var roleid;
 
-
 /* GET users listing. */
 router.get('/login',
   function(req, res){
@@ -61,7 +60,7 @@ function isAdmin(req, res, next) {
    if (req.user && roleid == roleType){
     next();
   }  else {
-      res.sendStatus(500);
+      res.redirect('/');
     }
   }
 
@@ -74,7 +73,7 @@ function isDoctor(req, res, next) {
   if (req.user && roleid !== roleType){
     next();
   } else {
-    res.sendStatus(500);
+    res.redirect('/');
   }
 }
 
@@ -115,7 +114,5 @@ router.get('/profile/patients/:pat_id/regimens', function(req, res, next){
 
 router.post('/profile/patients/:pat_id/regimens', db2.upsertRegimen);
 
-
-//router.use('/admin', admin);
 
 module.exports = router;

@@ -9,7 +9,7 @@ var isEditingRegimen;
 var editingIndex;
 var pathname = window.location.pathname.split('/');
 var path_id = pathname[4]; // gets patient id from url
-var reqCardId;
+var card_id;
 // init request handling for select patient profile (loads the regimen data)
 function loadRegimensRequest(url) {
 	$('#regimen-statustext-current').html('<i class="fa fa-refresh fa-spin fa-2x fa-fw"></i><span class="sr-only">Loading...</span>');
@@ -17,7 +17,7 @@ function loadRegimensRequest(url) {
 
 	$.getJSON(url, function(data) {
 		if (data.regimens) {
-    	reqCardId=(data.regimens);
+    	card_id=(data.regimens);
       displayRegimens(data.regimens);
 		}
 	})
@@ -149,6 +149,11 @@ function insertRegimenCard(regimen) {
 
 }
 
+function getCardID(regimen) {
+  var cardid = regimen;
+
+
+}
 // .................................................................................................. //
 
 
@@ -406,7 +411,7 @@ function saveRegimen() {
 	}
 
 	med_name = med_name.charAt(0).toUpperCase() + med_name.slice(1);
-  var card_id;
+  var test2;
 	var regimen = {
 		med_name : med_name,
 		start_date : start_date_wrapper.format('MM/DD/YYYY'),
@@ -418,23 +423,24 @@ function saveRegimen() {
 	if (isEditingRegimen) {
 		patientRegimens_current[editingIndex] = regimen;
 		updateRegimenCard(editingIndex, regimen.med_name, regimen.start_date, regimen.end_date);
-    card_id= reqCardId[editingIndex].id;
-
-    console.log(card_id);
+    test2= card_id[editingIndex].id;
+  //  regimen.test2 = test2;
+    console.log(test2);
 	} else {
 		if ($('#regimen-statustext-current').is(':visible')) $('#regimen-statustext-current').hide();
 		insertRegimenCard(regimen);
 	}
 
 	$('#regimen-modal').modal('toggle');
-
+console.log(test2);
+console.log(regimen);
 var reggie = JSON.stringify(regimen);
 // POST request to create or update card
   $.ajax
   ({
       type: "POST",
       dataType: 'json',
-      data: {card_id : card_id, regimen : reggie},
+      data: {test2 : test2, regimen : reggie},
       url: window.location.pathname,
       success: function (data) {
       console.log("Thanks!", data);
