@@ -88,7 +88,7 @@ function upsertRegimen(req, res, next){
   var pat = parseInt(req.params.pat_id);
   var card_id = req.body.test2;
 
-console.log(req.body);
+  console.log(req.body);
 
   if (card_id){
     req.app.get('db').regimens.update({id: card_id, card: card}, function(err, result){
@@ -108,7 +108,7 @@ console.log(req.body);
         console.log("Card successfully created");
               console.log("after", result);
               res.json(result);
-            card_id=result.id;
+            //card_id=result.id;
       }
     });
   }
@@ -118,14 +118,18 @@ console.log(req.body);
 
 
 function updateDoctorStatus(req, res, next) {
-  var docid = parseInt(req.user.id);
-  var status;
-  db.none('update users set acct_active=$1 where id=$2', [status, docid])
+  var docid = parseInt(req.body.acct);
+  console.log(docid, req.params);
+  var newStatus = req.body.option;
+  console.log (newStatus);
+  console.log(req.body);
+
+  db.none('update users set acct_active=$1 where id=$2', [newStatus, docid])
     .then(function () {
       res.status(200)
         .json({
           status: 'success',
-          message: 'Changed activation status'
+          message: 'Changed activation status to ' + newStatus
         });
     })
     .catch(function (err) {
@@ -133,11 +137,25 @@ function updateDoctorStatus(req, res, next) {
     });
 }
 
-// function deleteRegimen(req, res, next) {
-//
-//
-//
-// }
+function deleteRegimen(req, res, next) {
+  var card = req.body.regimen;
+  var card_id = req.body.test3;
+  console.log(req.body);
+
+  req.app.get('db').regimens.destroy({id: card_id}, function(err, result){
+    //Array containing the destroyed record is returned
+    if (err) {
+      console.log("Could not delete card");
+
+    } else{
+      console.log("deleted card");
+
+      res.json(result);
+    }
+  });
+
+
+}
 
 
 module.exports = {
@@ -146,5 +164,7 @@ module.exports = {
   getAllDoctors: getAllDoctors,
   getAllRegimens: getAllRegimens,
   upsertRegimen: upsertRegimen,
-  updateDoctorStatus: updateDoctorStatus
+  updateDoctorStatus: updateDoctorStatus,
+  deleteRegimen: deleteRegimen
+
 };

@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var dotenv = require('dotenv');
+var connectRoles = require('connect-roles');
 dotenv.load();
 
 var massive = require("massive");
@@ -25,7 +26,7 @@ var pg = require('pg').native;
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-passport.use( new LocalStrategy({
+passport.use(new LocalStrategy({
   usernameField: 'username',
   passwordField: 'password'
 },
@@ -106,6 +107,7 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 app.use('/', routes);
 app.use('/users', users);
