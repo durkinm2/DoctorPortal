@@ -418,7 +418,11 @@ function saveRegimen() {
 	if (isEditingRegimen) {
 		patientRegimens_current[editingIndex] = regimen;
 		updateRegimenCard(editingIndex, regimen.med_name, regimen.start_date, regimen.end_date);
+<<<<<<< HEAD
     card_id= reqCardId[editingIndex].id;
+=======
+    card_id = reqCardId[editingIndex].id;
+>>>>>>> first commit
 
     console.log(card_id);
 	} else {

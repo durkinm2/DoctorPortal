@@ -10,6 +10,10 @@ var editingIndex;
 var pathname = window.location.pathname.split('/');
 var path_id = pathname[4]; // gets patient id from url
 var card_id;
+<<<<<<< HEAD
+=======
+var test2;
+>>>>>>> first commit
 // init request handling for select patient profile (loads the regimen data)
 function loadRegimensRequest(url) {
 	$('#regimen-statustext-current').html('<i class="fa fa-refresh fa-spin fa-2x fa-fw"></i><span class="sr-only">Loading...</span>');
@@ -18,6 +22,10 @@ function loadRegimensRequest(url) {
 	$.getJSON(url, function(data) {
 		if (data.regimens) {
     	card_id=(data.regimens);
+<<<<<<< HEAD
+=======
+			test2=card_id[editingIndex].id;
+>>>>>>> first commit
       displayRegimens(data.regimens);
 		}
 	})
@@ -149,11 +157,15 @@ function insertRegimenCard(regimen) {
 
 }
 
+<<<<<<< HEAD
 function getCardID(regimen) {
   var cardid = regimen;
 
 
 }
+=======
+
+>>>>>>> first commit
 // .................................................................................................. //
 
 
@@ -411,27 +423,42 @@ function saveRegimen() {
 	}
 
 	med_name = med_name.charAt(0).toUpperCase() + med_name.slice(1);
+<<<<<<< HEAD
   var test2;
+=======
+
+>>>>>>> first commit
 	var regimen = {
 		med_name : med_name,
 		start_date : start_date_wrapper.format('MM/DD/YYYY'),
 		end_date : end_date_wrapper.format('MM/DD/YYYY'),
 		date_time_combos : date_time_combos,
+<<<<<<< HEAD
 		dosage_instructions: dosage_instructions,
+=======
+		dosage_instructions: dosage_instructions
+>>>>>>> first commit
 	}
 
 	if (isEditingRegimen) {
 		patientRegimens_current[editingIndex] = regimen;
 		updateRegimenCard(editingIndex, regimen.med_name, regimen.start_date, regimen.end_date);
+<<<<<<< HEAD
     test2= card_id[editingIndex].id;
   //  regimen.test2 = test2;
     console.log(test2);
+=======
+    test2 = card_id[editingIndex].id;
+  //  regimen.test2 = test2;
+   console.log(test2);
+>>>>>>> first commit
 	} else {
 		if ($('#regimen-statustext-current').is(':visible')) $('#regimen-statustext-current').hide();
 		insertRegimenCard(regimen);
 	}
 
 	$('#regimen-modal').modal('toggle');
+<<<<<<< HEAD
 console.log(test2);
 console.log(regimen);
 var reggie = JSON.stringify(regimen);
@@ -447,6 +474,24 @@ var reggie = JSON.stringify(regimen);
       }
   });
 
+=======
+
+console.log(regimen);
+var reggie = JSON.stringify(regimen);
+// POST request to create or update card
+
+$.ajax
+({
+		type: "POST",
+		dataType: 'json',
+		data: {test2 : test2, regimen : reggie},
+		url: window.location.pathname,
+		success: function (data) {
+		console.log("youre welcome", data);
+		location.reload();
+	}
+});
+>>>>>>> first commit
 }
 
 function isValidTimeslot(timeslotStr) {

@@ -84,35 +84,65 @@ function getAllRegimens(req, res, next) {
 }
 
 function upsertRegimen(req, res, next){
+<<<<<<< HEAD
   var card= req.body.regimen;
   var pat = parseInt(req.params.pat_id);
   var card_id = req.body.test2;
   console.log(card_id,"cardid", card);
 
   if (card_id) {
+=======
+  var card = req.body.regimen;
+  var pat = parseInt(req.params.pat_id);
+  var card_id = req.body.test2;
+
+console.log(req.body);
+
+  if (card_id){
+>>>>>>> first commit
     req.app.get('db').regimens.update({id: card_id, card: card}, function(err, result){
       if (err) {
         console.log("Could not update card");
       } else {
         console.log("Card successfully updated");
+<<<<<<< HEAD
       }
     });
   }
 // if creating card
   else {
+=======
+        res.json(result);
+      }
+    });
+// if creating card
+}  else {
+>>>>>>> first commit
     req.app.get('db').regimens.save({doc_id: req.user.id, pat_id: pat, card: card}, function(err, result){
       if (err) {
         console.log("Could not create card");
       } else {
         console.log("Card successfully created");
+<<<<<<< HEAD
               console.log("after", result, card);
               res.json(result);
+=======
+              console.log("after", result);
+              res.json(result);
+            card_id=result.id;
+>>>>>>> first commit
       }
     });
   }
 
+<<<<<<< HEAD
 
 }
+=======
+  }
+
+
+>>>>>>> first commit
 
 function updateDoctorStatus(req, res, next) {
   var docid = parseInt(req.user.id);
@@ -130,6 +160,15 @@ function updateDoctorStatus(req, res, next) {
     });
 }
 
+<<<<<<< HEAD
+=======
+// function deleteRegimen(req, res, next) {
+//
+//
+//
+// }
+
+>>>>>>> first commit
 
 module.exports = {
   getAllPatients: getAllPatients,

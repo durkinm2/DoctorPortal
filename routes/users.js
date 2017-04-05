@@ -95,6 +95,10 @@ router.get('/api/regimens/:pat_id', isDoctor, db2.getAllRegimens);
 router.get('/api/doctors', isAdmin, db2.getAllDoctors);
 router.get('/api/status/:doc_id', isAdmin, db2.updateDoctorStatus);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> first commit
 router.get('/profile/patients',
   function(req, res, next){
   req.app.get('db').patients.find(
