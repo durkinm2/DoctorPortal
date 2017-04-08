@@ -5,45 +5,42 @@ var passport = require('passport');
 var db2 = require('./queries');
 var db = app.get('db');
 var deasync = require('deasync');
+var connectRoles = require('connect-roles');
 var roleType;
 var roleid;
 
 /* GET users listing. */
-router.get('/login',
+router.get('/login', ensureLoggedOut,
   function(req, res){
     res.render('login', {layout:null});
   });
 
-router.post('/login',
-  // This is where authentication happens
-
-  passport.authenticate('local', { failureRedirect: 'login' }),function (req, res, next) {
-    roleid = parseInt(req.user.role_id);
-
-   req.app.get('db').roles.findOne({role_name : "admin"},
-     function(err, result) {
-       console.log(result);
-       roleType = parseInt(result.role_id);
-     });
-     console.log(roleType);
-     console.log(roleid,roleType);
-     console.log("fresh",req.fresh);
-     console.log(req.user);
-     if (roleid !== roleType){
-       console.log('isprofile');
-       res.redirect('profile');
-     } else if (roleid == roleType){
-       console.log("isadmin");
-       res.redirect('admin');
-     } else{
-       console.log("low");
-       res.sendStatus(500);
-
+router.post('/login', function(req, res, next){
+/* This is where authentication happens
+ * If authentication fails, remains on login page
+ * If authentication succeeds, gets role type for authorization purposes
+ */
+  passport.authenticate('local', function(err, user, info) {
+    if (err) {
+       console.log("err", err);
+       return next(err);
      }
-
-   }
-
- );
+    if (!user) {
+       return res.redirect('/login');
+     }
+// method of authorization subject to change, works fine though
+    req.logIn(user, function(err) {
+       if (err) return next(err);
+       if (user.role_id === 1){
+         roleType = user.role_id;
+         return res.redirect('admin');
+       } else {
+         roleType = user.role_id;
+         return res.redirect('profile');
+       }
+      });
+    })(req, res, next);
+  });
 
 router.get('/logout',
   function(req, res){
@@ -56,67 +53,84 @@ router.get('/',
     res.redirect('/');
   });
 
-function isAdmin(req, res, next) {
-   if (req.user && roleid == roleType){
+// Prevents access to login page if already logged in
+function ensureLoggedOut(req, res, next) {
+  if (!req.user){
     next();
-  }  else {
-      res.redirect('/');
-    }
+  } else if (roleType === 1) {
+    res.redirect('admin');
+  } else if (roleType === 2) {
+    res.redirect('profile');
+  } else {
+    res.sendStatus(500);
   }
+}
 
-router.get('/admin',
+// Callback to authorize a route by role
+function andRestrictTo(role) {
+  return function(req, res, next) {
+    if(!req.user) {
+      res.redirect('/');
+    } else if (roleType === role) {
+      next();
+    } else {
+    //  next(new Error('Unauthorized'));
+    res.render('error403', {message: "Unauthorized", type : 403, layout : 'error403'});
+  }
+  }
+}
+
+// Routes
+
+// router.all('/admin/*', andRestrictTo("administrator"));
+router.get('/admin', andRestrictTo(1),
   function(req, res) {
       res.render('admin', {user: req.user, layout: 'adminLayout'});
   });
 
-function isDoctor(req, res, next) {
-  if (req.user && roleid !== roleType){
-    next();
-  } else {
-    res.redirect('/');
-  }
-}
-
-
-router.all('/profile/*', isDoctor);
-//admin.all('/', isAdmin);
-router.get('/profile', isDoctor,
-  function(req, res){
+//router.all('/profile/*', andRestrictTo(2));
+router.get('/profile', andRestrictTo(2),
+  function(req, res) {
       res.render('profile', { title: 'Home', user: req.user });
   });
 
-router.get('/profile/medibase',
-    function(req, res, next){
+router.get('/profile/medibase', andRestrictTo(2),
+  function(req, res, next){
       res.render('medibase', { title: 'Medibase', user: req.user});
   });
-/*-------------------patients API---------------------------*/
-router.get('/api/patients', isDoctor, db2.getAllPatients);
-router.get('/api/regimens/:pat_id', isDoctor, db2.getAllRegimens);
-router.get('/api/doctors', isAdmin, db2.getAllDoctors);
-router.get('/api/status/:doc_id', isAdmin, db2.updateDoctorStatus);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> first commit
-router.get('/profile/patients',
+router.get('/profile/patients', andRestrictTo(2),
   function(req, res, next){
-  req.app.get('db').patients.find(
-    function(err, result){
-      if (err) {
-      return next(err);
-      }
-      res.render('patients', { title: 'Patients', user: req.user });
-    });
+    req.app.get('db').patients.find(
+      function(err, result){
+        if (err) {
+          return next(err);
+        }
+        res.render('patients', { title: 'Patients', user: req.user });
+      });
+  });
+
+router.get('/profile/patients/:pat_id', andRestrictTo(2), db2.getSinglePatient);
+
+router.get('/profile/patients/:pat_id/regimens', andRestrictTo(2),
+  function(req, res, next){
+    res.render('regimens', { title: 'Regimens', user: req.user });
 });
 
-router.get('/profile/patients/:pat_id', db2.getSinglePatient);
-
-router.get('/profile/patients/:pat_id/regimens', function(req, res, next){
-  res.render('regimens', { title: 'Regimens', user: req.user });
+router.get('/profile/patients/:pat_id/reports', andRestrictTo(2),
+  function(req, res, next){
+    res.render('reports', { title: 'Reports', user: req.user });
 });
 
-router.post('/profile/patients/:pat_id/regimens', db2.upsertRegimen);
-
+/*----------------------- API ---------------------------*/
+router.get('/api/patients', andRestrictTo(2), db2.getAllPatients);
+router.get('/api/regimens/:pat_id',andRestrictTo(2), db2.getAllRegimens);
+router.get('/api/doctors', andRestrictTo(1), db2.getAllDoctors);
+router.post('/api/status/:doc_id', andRestrictTo(1), db2.updateDoctorStatus);
+router.post('/api/regimen/:pat_id', andRestrictTo(2), db2.deleteRegimen);
+router.post('/api/regimens/:pat_id', andRestrictTo(2),db2.upsertRegimen);
+router.post('/api/regimenz/:pat_id', andRestrictTo(2), db2.upsertRegimen);
+router.get('/api/regimen/:pat_id', andRestrictTo(2), db2.upsertRegimen);
+router.post('/api/response/:pat_id', db2.sendResponse);
 
 module.exports = router;

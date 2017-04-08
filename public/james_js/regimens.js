@@ -1,81 +1,22 @@
 
 // var currPatientRegimens;
 
-var patientRegimens_current;
-var patientRegimens_past;
 
+var test4;
+var test5;
 var currentRegimenStartDate;
 var isEditingRegimen;
 var editingIndex;
 var pathname = window.location.pathname.split('/');
 var path_id = pathname[4]; // gets patient id from url
-var card_id;
-<<<<<<< HEAD
-=======
-var test2;
->>>>>>> first commit
+
+var test6;
+var test7;
+var totalcards;
+
 // init request handling for select patient profile (loads the regimen data)
-function loadRegimensRequest(url) {
-	$('#regimen-statustext-current').html('<i class="fa fa-refresh fa-spin fa-2x fa-fw"></i><span class="sr-only">Loading...</span>');
-	$('#regimen-statustext-past').html('<i class="fa fa-refresh fa-spin fa-2x fa-fw"></i><span class="sr-only">Loading...</span>');
-
-	$.getJSON(url, function(data) {
-		if (data.regimens) {
-    	card_id=(data.regimens);
-<<<<<<< HEAD
-=======
-			test2=card_id[editingIndex].id;
->>>>>>> first commit
-      displayRegimens(data.regimens);
-		}
-	})
-	.fail(function(event) {
-		if (event.status === 404) {
-			$('#regimen-statustext-current').html('<i class="fa fa-ban" aria-hidden="true"></i> An error has occurred, please refresh the page.');
-			$('#regimen-statustext-past').html('<i class="fa fa-ban" aria-hidden="true"></i> An error has occurred, please refresh the page.');
-		}
-	});
-
-}
-
-// ..................... HTML element creation & insertion methods for dynamic elements ..................... //
-function createRegimenCard_past(regimen) {
-	// dont check for empty fields, would never exist when created initially
-	var regimenCard =
-		'<div class="card card-regimen-instance card-clickable regimen-past">'
-		+ '<div class="card-block">'
-			+ '<h3 class="card-title pb-2">' + regimen.med_name + '</h3>' + '<hr>'
-			+ '<p>' + 'End Date: ' + regimen.end_date + '</p>'
-		' + </div>'
-	  + '</div>';
-
-	  var bootstrap_cardwrapper =
-	 	'<div class="col-sm-4 mb-4">'
-	 		+ regimenCard;
-	  + '</div>';
-
-	return bootstrap_cardwrapper;
-}
-
-function createRegimenCard_current(regimen) {
-	var regimenCard =
-		'<div class="card card-regimen-instance card-clickable regimen-current">'
-		+ '<a href="#" class="delete-regimen"></a>'
-		+ '<div class="card-block">'
-			+ '<h3 class="card-title pb-2">' + regimen.med_name + '</h3>' + '<hr>'
-			+ '<p>' + 'Start Date: ' + regimen.start_date + '</p>'
-			+ '<p>' + '&nbspEnd Date: ' + regimen.end_date;
-		' + </div>'
-	  + '</div>';
-
-	 var bootstrap_cardwrapper =
-	 	'<div class="col-sm-4 mb-4">'
-	 		+ regimenCard;
-	  + '</div>';
 
 
-	return bootstrap_cardwrapper;
-}
 
 function createTimeslot() {
 	var timeslot =
@@ -137,54 +78,22 @@ function createWeekSchema() {
       return weekSchema;
 }
 
-function insertRegimenCard(regimen) {
-	var regimen_card;
 
-  	if (new Date(regimen.end_date).setHours(0,0,0,0) >= new Date().setHours(0,0,0,0)) {
-  		regimen_card = createRegimenCard_current(regimen);
-  		$('#regimen-row-current').append(regimen_card);
-  		if (!patientRegimens_current) patientRegimens_current = [];
-  		patientRegimens_current.push(regimen);
+// function refreshRegimens(url){
+// 	$.getJSON(url, function(data) {
+// 		if (data.regimens) {
+//     	card_id=(data.regimens.id);
+//     	console.log(card_id);
+//
+// 		}
+// 	})
+// }
 
-  	}
-	else {
-		regimen_card = createRegimenCard_past(regimen);
-		$('#regimen-row-past').append(regimen_card);
-		if (!patientRegimens_past) patientRegimens_past = [];
-  		patientRegimens_past.push(regimen);
-	}
-
-
-}
-
-<<<<<<< HEAD
-function getCardID(regimen) {
-  var cardid = regimen;
-
-
-}
-=======
-
->>>>>>> first commit
 // .................................................................................................. //
 
 
 // ........................... methods for displaying each dynamic component ........................ //
-function displayRegimens(regimens) {
-	$('#regimen-statustext-current').hide();
-	$('#regimen-statustext-past').hide();
-	for (var i = 0; i < regimens.length; i++) {
-		insertRegimenCard(regimens[i].card);
-	}
-	if (!patientRegimens_past) {
-		$('#regimen-statustext-past').html('<i class="fa fa-ban" aria-hidden="true"></i> Nothing to show.');
-		$('#regimen-statustext-past').show();
-	}
-	if (!patientRegimens_current) {
-		$('#regimen-statustext-current').html('<i class="fa fa-ban" aria-hidden="true"></i> Nothing to show.');
-		$('#regimen-statustext-current').show();
-	}
-}
+
 
 function displayDateContainers(newStartDate, newEndDate) {
 
@@ -349,7 +258,7 @@ function loadSelectedRegimen(selectedRegimen, alreadyEnded) {
 
 	if (!alreadyEnded) {
 		isEditingRegimen = true;
-		// $($('#regimen-modal .modal-content')[0]).find('*').prop('disabled', false);
+
 		$('#regimen-datepicker-enddate').datepicker('setDate', selectedRegimen.end_date);
 
 		if (start_date_wrapper.diff(now, 'days') < 0) { // start date has already passed, disable it to prevent edits
@@ -369,6 +278,7 @@ function loadSelectedRegimen(selectedRegimen, alreadyEnded) {
 }
 
 function saveRegimen() {
+
 	var med_name = $('#medication-name').val();
 
 	var dosage_instructions = $('#dosage-instructions').val();
@@ -423,75 +333,49 @@ function saveRegimen() {
 	}
 
 	med_name = med_name.charAt(0).toUpperCase() + med_name.slice(1);
-<<<<<<< HEAD
-  var test2;
-=======
+	var test2;
 
->>>>>>> first commit
+
 	var regimen = {
 		med_name : med_name,
 		start_date : start_date_wrapper.format('MM/DD/YYYY'),
 		end_date : end_date_wrapper.format('MM/DD/YYYY'),
 		date_time_combos : date_time_combos,
-<<<<<<< HEAD
 		dosage_instructions: dosage_instructions,
-=======
-		dosage_instructions: dosage_instructions
->>>>>>> first commit
 	}
 
-	if (isEditingRegimen) {
-		patientRegimens_current[editingIndex] = regimen;
-		updateRegimenCard(editingIndex, regimen.med_name, regimen.start_date, regimen.end_date);
-<<<<<<< HEAD
-    test2= card_id[editingIndex].id;
-  //  regimen.test2 = test2;
-    console.log(test2);
-=======
-    test2 = card_id[editingIndex].id;
-  //  regimen.test2 = test2;
-   console.log(test2);
->>>>>>> first commit
-	} else {
-		if ($('#regimen-statustext-current').is(':visible')) $('#regimen-statustext-current').hide();
-		insertRegimenCard(regimen);
-	}
+
+
 
 	$('#regimen-modal').modal('toggle');
-<<<<<<< HEAD
-console.log(test2);
-console.log(regimen);
-var reggie = JSON.stringify(regimen);
-// POST request to create or update card
-  $.ajax
-  ({
-      type: "POST",
-      dataType: 'json',
-      data: {test2 : test2, regimen : reggie},
-      url: window.location.pathname,
-      success: function (data) {
-      console.log("Thanks!", data);
-      }
-  });
 
-=======
+// if(card_id.id) {
+// 	test2 = patientRegimens_current[card_id].id;
+//
+// }
+if(isEditingRegimen){
+		test2 = patientRegimens_current[editingIndex].id;
+}
 
-console.log(regimen);
 var reggie = JSON.stringify(regimen);
 // POST request to create or update card
 
-$.ajax
-({
-		type: "POST",
-		dataType: 'json',
-		data: {test2 : test2, regimen : reggie},
-		url: window.location.pathname,
-		success: function (data) {
-		console.log("youre welcome", data);
-		location.reload();
-	}
-});
->>>>>>> first commit
+
+	console.log(test2);
+	$.ajax
+	({
+	    type: "POST",
+	    dataType: 'json',
+	    data: {test2 : test2, regimen : reggie},
+	    url: '/users/api/regimenz/' + path_id ,
+	    success: function (data) {
+	    console.log("Thanks!", data);
+			test2 = data.id;
+			loadRegimensRequest('/users/api/regimens/' + path_id );
+
+		}
+	});
+
 }
 
 function isValidTimeslot(timeslotStr) {
@@ -660,11 +544,13 @@ function handler_regimen_click(event) {
 			var reg_index = $('.regimen-current').index(event.currentTarget);
 
 			$('#delete-modal').modal('show');
-			$('#delete-modal .modal-body:first').html('<p><b>Name:</b> ' + patientRegimens_current[reg_index].med_name + '</p>' +
-													  '<p><b>Start Date:</b> ' + patientRegimens_current[reg_index].start_date + '</p>' +
-													  '<p><b>End Date:</b>   ' + patientRegimens_current[reg_index].end_date + '</p>');
+			$('#delete-modal .modal-body:first').html('<p><b>Name:</b> ' + patientRegimens_current[reg_index].card.med_name + '</p>' +
+													  '<p><b>Start Date:</b> ' + patientRegimens_current[reg_index].card.start_date + '</p>' +
+													  '<p><b>End Date:</b>   ' + patientRegimens_current[reg_index].card.end_date + '</p>');
 			$('#delete-modal-delete').on('click', function() {
 				$('#delete-modal').modal('hide');
+				var test3 = patientRegimens_current[reg_index].id;
+				var byereg = JSON.stringify(patientRegimens_current[reg_index]);
 
 				$($('.regimen-current')[reg_index]).parent().remove(); // remove card from page
 
@@ -673,19 +559,30 @@ function handler_regimen_click(event) {
 					$('#regimen-statustext-current').html('<i class="fa fa-ban" aria-hidden="true"></i> Nothing to show.');
 					$('#regimen-statustext-current').show();
 				}
+				console.log("testdelete", card_id[reg_index].id);
 
+
+				$.ajax
+				({
+						type: "POST",
+						dataType: 'json',
+						data: {test3 : test3, regimen : byereg},
+						url: '/users/api/regimen/' + path_id,
+						success: function (data) {
+						console.log("Ajax delete sent!", data);
+						}
+				});
 				$(this).unbind('click');
 			});
 
-			// send the new regimens to database
-
 			return;
 		}
+
 		editingIndex = $('.regimen-current').index(event.currentTarget);
-		loadSelectedRegimen(patientRegimens_current[editingIndex], false);
+		loadSelectedRegimen(patientRegimens_current[editingIndex].card, false);
 	} else if ($(event.currentTarget).hasClass('regimen-past')) {
 		editingIndex = $('.regimen-past').index(event.currentTarget);
-		loadSelectedRegimen(patientRegimens_past[editingIndex], true);
+		loadSelectedRegimen(patientRegimens_past[editingIndex].card, true);
 	}
 
 	if ($($('#regimen-modal .form-group')[1]).is(':hidden')) {
@@ -788,7 +685,7 @@ $(document).ready(function() {
 
 
   loadRegimensRequest('/users/api/regimens/' + path_id );
-
+	//refreshRegimens('/users/api/regimens/' + path_id);
 	// try and load datepickers only once, and just use changedate to mess with vals
 	$('#regimen-datepicker-startdate').datepicker({
 		startDate: '0',

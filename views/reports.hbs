@@ -1,49 +1,116 @@
+<div class="container-fluid" id="reports-overview">
+     <div class="row pt-3">
+         <div class="col-sm-12">
+           <h1>Reports <span>for {{fname}} {{lname}}</span></h1>
+         </div>
+     </div>
 
-    <div class="container-fluid">
-      <div class="row pt-3">
-          <div class="col-sm-12">
-            <h1>Reports <span>for John Smith</span></h1>
-          </div>
-      </div>
+     <div class="row">
+       <main class="col-sm-12">
 
-      <div class="row">
-        <main class="col-sm-12">
+         <div class="container-fluid ml-50 mr-50 mt-40">
 
-          <div class="container-fluid ml-50 mr-50 mt-75">
+           <div class="row mb-neg-10">
+             <div class="col-sm-12 regimen-label">Current Regimen Reports</div>
+           </div>
+           <hr>
+           <div class="container-fluid text-center">
+             <h5 class="h-statustext" id="regimen-statustext-current"></h5>
+             <div class="row text-center" id="regimen-row-current"></div>
+           </div>
 
-            <div class="row text-center">
-              <div class="col-sm-4">
-                <div class="card card-clickable card-report">
-                  <div class="card-block">
-                    <h3 class="card-title pb-2">Report A</h3>
-                    <hr>
-                    <p>Report of ...</p>
-                  </div>
-                </div>
-              </div>
+           <div class="row mb-neg-10">
+             <div class="col-sm-12 regimen-label">Past Regimen Reports</div>
+           </div>
+           <hr>
+           <div class="container-fluid text-center">
+             <h5 class="h-statustext" id="regimen-statustext-past"></h5>
+             <div class="row text-center" id="regimen-row-past"></div>
+           </div>
 
-              <div class="col-sm-4">
-                <div class="card card-clickable card-report">
-                  <div class="card-block">
-                    <h3 class="card-title pb-2">Report B</h3>
-                    <hr>
-                    <p>Report of ...</p>
-                  </div>
-                </div>
-              </div>
+         </div>
+       </main>
+     </div>
+   </div>
 
-              <div class="col-sm-4">
-                <div class="card card-clickable card-report">
-                  <div class="card-block">
-                    <h3 class="card-title pb-2">Report C</h3>
-                    <hr>
-                    <p>Report of ...</p>
-                  </div>
-                </div>
-              </div>
+   <div class="mr-50 ml-50 mt-50" id="regimen-report-container">
+     <div>
+       <h5 style="display: inline;">Regimen Report</h5>
+       <button class="btn btn-sm btn-primary float-right" id="return-to-overview">Back to Reports Overview</button>
+     </div>
+     <hr>
+     <h6 id="report-medname"></h6>
+     <h6 id="report-startdate"></h6>
+     <h6 id="report-enddate"></h6>
 
-            </div>
-          </div>
-        </main>
-      </div>
-    </div>
+     <hr>
+
+     <div class="row">
+       <div class="col-sm-8">
+         <div class="row">
+           <div class="col-sm-6"><h5>Recorded Responses</h5></div>
+           <div class="col-sm-6">
+             <div class="form-group float-right" style="display: inline; margin-bottom: 2px;">
+               <label for="dropdownMenuButton" class="form-control-label">Export As:</label>
+               <div class="dropdown dropdown-inline">
+                 <div class="btn-group">
+                   <button class="btn btn-secondary btn-sm" id="dropdown-export-type" type="button" aria-haspopup="true" aria-expanded="false">PDF</button>
+                   <button type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     <span class="sr-only">Toggle Dropdown</span>
+                   </button>
+                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                     <a class="dropdown-item" href="#">PDF</a>
+                     <a class="dropdown-item" href="#">Excel (XLSX)</a>
+                     <a class="dropdown-item" href="#">CSV</a>
+                     <a class="dropdown-item" href="#">TXT</a>
+                   </div>
+                 </div>
+               </div>
+               <button type="button" class="btn btn-primary btn-sm btn-inline" id="export-table">Export</button>
+             </div>
+           </div>
+         </div>
+
+         <div class="report-table-container">
+
+           <table class="table-reports" id="table-current-report" data-toggle="table" class="dp-table-modal"></table>
+         </div>
+       </div>
+
+
+
+       <div class="col-sm-4">
+         <h5 style="margin-bottom: 12px;">Graphical Synopsis of Responses</h5>
+         <div class="report-chart-container">
+           <canvas id="chart-current-report"></canvas>
+         </div>
+       </div>
+
+
+     </div>
+
+     <div class="row">
+       <div class="col-sm-12">
+         <span>Scroll: </span>
+         <button class="btn btn-sm btn-secondary" id="table-scroll-left">Left</button>
+         <button class="btn btn-sm btn-secondary" id="table-scroll-right">Right</button>
+       </div>
+     </div>
+
+   </div>
+
+   <!-- Tether (used by Bootstrap) -->
+ <script src="/dist/js/bootstrap/tether.min.js"></script>
+
+
+
+      <script src="/dist/js/jquery/tableExport.jquery/libs/FileSaver/FileSaver.min.js" type="text/javascript"></script>
+       <script src="/dist/js/jquery/tableExport.jquery/libs/js-xlsx/xlsx.core.min.js" type="text/javascript"></script>
+       <script src="/dist/js/jquery/tableExport.jquery/libs/jsPDF/jspdf.min.js" type="text/javascript"></script>
+       <script src="/dist/js/jquery/tableExport.jquery/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js" type="text/javascript"></script>
+       <script src="/dist/js/jquery/tableExport.jquery/tableExport.min.js" type="text/javascript"></script>
+       <!-- Reports Core -->
+       <script src="/dist/js/require.js" type="text/javascript"></script>
+
+       <script src="/james_js/regimenLoader.js" type="text/javascript"></script>
+       <script src="/james_js/reports.js" type="text/javascript"></script>

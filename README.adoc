@@ -39,5 +39,7 @@ testing:
 -whole top navbar clickable
 -login page accessible when already logged in
 -/patients can't click table filter icon
--doc name only shows in navbar when on /profile (hbs helper)
+
+-query admin table
+-add forgot password
 -fix dates in admin pages

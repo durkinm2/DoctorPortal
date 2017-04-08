@@ -1,3 +1,10 @@
+/**
+ * admin.js - Allows administrative accounts to activate or deactivate
+ * a doctors Hospital account for use with the Web Portal.
+ * @author - James Salvatore
+ */
+
+
 var doctorAccounts;		 // loaded doctor accounts
 var currSelectedAccount; // currently selected account instance
 
@@ -7,9 +14,10 @@ var currSelectedAccount; // currently selected account instance
 * {Object} row - The account object that was selected
 */
 function handler_rowClick(event, row) {
+	console.log(row);
 	currSelectedAccount = row; // account row clicked
 	$('#editAccount-modal').modal('toggle');
-	$('#account-status-dropdown').html(currSelectedAccount.account_active);
+	$('#account-status-dropdown').html(currSelectedAccount.acct_active);
 }
 
 /**
@@ -27,15 +35,34 @@ function saveAccountChanges() { // save button clicked in modal
 	editAccount();
 }
 
+function loadTableData(accounts) {
+	var rows = [];
+	for (var i = 0; i < accounts.length; i++){
+var currAccount = accounts[i];
+		rows.push({
+			id: currAccount.id,
+			username: currAccount.username,
+			acct_active: (currAccount.acct_active ? 'Active' : 'Not Active'),
+			fname: currAccount.fname,
+			lname: currAccount.lname,
+			active: currAccount.active
+
+		});
+	}
+		return rows;
+
+}
+
 /**
 * Loads the data for all doctor accounts registered in the 'Hopspital' database.
 * {String} url - JSON url containing each of the account objects
 */
 function loadDoctorAccounts(url) {
 	$.getJSON(url, function(data) {
-		if (data.accounts) {
-			doctorAccounts = data.accounts;
-			$('#table-account-instances').bootstrapTable('load', doctorAccounts); // load data from url into the table
+console.log(data);
+		if (data.data) {
+			doctorAccounts = data.data;
+			$('#table-account-instances').bootstrapTable('load',loadTableData(doctorAccounts)); // load data from url into the table
 		}
 	})
 	.fail(function(event) {
@@ -52,33 +79,58 @@ function handler_modalClose() {
 	currSelectedAccount = null; // wipe the currently selected account
 }
 
+function sameAccounts(a, b) {
+	if (a.acct_active === b.acct_active &&
+	    a.active === b.active &&
+		  a.fname === b.fname &&
+		  a.id === b.id &&
+		  a.lname === b.lname &&
+		  a.username === b.username) return true;
+
+			return false;
+}
+
+function updateStatus(accountToChange, option) {
+	$.ajax({
+		type: "POST",
+		//dataType: 'json',
+		data: {option : option, acct : accountToChange.id},
+		url: '/users/api/status/' + accountToChange.id,
+		success: function (data) {
+		loadDoctorAccounts('/users/api/doctors');
+		console.log("Ajax updated status", data);
+		console.log(doctorAccounts)
+	},
+	error: function(err) {
+		console.log("error", err);
+	}
+	});
+}
+
 /**
 * Updates the account status of an account IF a change was actually made.
 */
 function editAccount() {
-	var selectedOption = $('#account-status-dropdown').html();
+	var selectedOption = $('#account-status-dropdown').html() === "Active" ? true : false;
+	var currSelectedAccountClone = jQuery.extend(true, {}, currSelectedAccount);
+	currSelectedAccountClone['acct_active'] = !selectedOption;
+	console.log(currSelectedAccountClone);
 	for (var i = 0; i < doctorAccounts.length; i++) {
-		if (doctorAccounts[i] === currSelectedAccount) {
-			if (doctorAccounts[i].account_active != selectedOption) { // update the account status of an account (if it was changed)
-				doctorAccounts[i].account_active = selectedOption;
+		console.log(doctorAccounts[i]);
+		if (sameAccounts(doctorAccounts[i], currSelectedAccountClone)) {
+			console.log('found a match');
+			if (doctorAccounts[i].acct_active != selectedOption) { // update the account status of an account (if it was changed)
+				console.log('status needs to be changed');
 
+				updateStatus(doctorAccounts[i], selectedOption);
 				// database call here to apply changes
 				// add a callback method to the database calling function, would look like this:
+
 				// calback:
 					// re-populate doctorAccounts after database updates and re-pulls newest changes
 					// then refresh the table (already done below)
-					$.ajax
-					({
-						type: "POST",
-						dataType: 'json',
-						data: newStatus,
-						url: '/api/status/' + row.id,
-						success: function () {
-						console.log("Thanks!");
-						}
-					});
-					$('#table-account-instances').bootstrapTable('refreshOptions', doctorAccounts);
-					$('#table-account-instances').bootstrapTable('refresh', doctorAccounts);
+					// $('#table-account-instances').bootstrapTable('refreshOptions', doctorAccounts);
+					// $('#table-account-instances').bootstrapTable('refresh', doctorAccounts);
 			}
 
 			$('#editAccount-modal').modal('toggle');
@@ -90,7 +142,7 @@ function editAccount() {
 
 // Load the data set on page-load (to be changed with an actual database function / url)
 $(document).ready(function() {
-	loadDoctorAccounts('../tests/doctor_accounts_test1.json');
+	loadDoctorAccounts('/users/api/doctors');
 });
 
 // UI handlers

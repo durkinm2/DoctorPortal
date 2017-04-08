@@ -324,7 +324,7 @@ div.fixed-table-scroll-outer {
 
 .pagination-fix-page-next {
     border-top-right-radius: 0.25em;
-    border-bottom-right-radius: 0.25em;   
+    border-bottom-right-radius: 0.25em;
 }
 
 .pagination-fix-active, .pagination-fix-active:hover {
@@ -337,9 +337,3 @@ div.fixed-table-scroll-outer {
     background-color: white;
     border-color: #D9D9D9;
 }
-
-
-
-
-
-

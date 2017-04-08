@@ -484,7 +484,7 @@
             return 'Search';
         },
         formatNoMatches: function () {
-            return 'No matching records found';
+            return 'No matching records found, please refresh the page.';
         },
         formatPaginationSwitch: function () {
             return 'Hide/Show pagination';

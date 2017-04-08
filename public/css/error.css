@@ -1,0 +1,84 @@
+body {
+  background-color: #f2f7f7
+
+}
+
+h1 {
+  color: #69d9db;
+  font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+	font-size: 55px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.4px;
+
+}
+
+h2 {
+  color: #69d9db;
+  font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+	font-size: 24px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.4px;
+}
+
+a {
+  font-family: Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  line-height: 26.4px;
+}
+
+diiv {
+   height: 300px;
+   width: 70%;
+   margin: 10px auto;
+   position: relative;
+}
+
+.book{
+  height: 300px;
+  width: 300px;
+  width: 70%;
+  position: absolute;
+  text-align: center;
+  margin: -120px 0 0 -35%;
+  left: 50%;
+  top: 30%;
+
+}
+
+.stop{
+  height: 300px;
+  width: 300px;
+  width: 70%;
+  position: absolute;
+  text-align: center;
+  margin: -200px 0 0 -35%;
+  left: 50%;
+  top: 30%;
+}
+
+.back {
+  height: 100px;
+  width: 300px;
+  position: absolute;
+  text-align: center;
+  margin: 10px 0 0 -150px;
+  left: 50%;
+  top: 50%;
+}
+
+.docicon {
+height: 200px;
+width: 300px;
+position: absolute;
+text-align: center;
+margin: -20px 0 0 -150px;
+left: 50%;
+top: 60%;
+}
