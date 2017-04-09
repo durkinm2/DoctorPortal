@@ -142,6 +142,25 @@ function deleteRegimen(req, res, next) {
 
 }
 
+
+function getRegimens(req, res, next) {
+  var patid = parseInt(req.params.pat_id);
+  //var docid = parseInt(req.user.id);
+  db.any('select card, id from regimens where pat_id = $1', patid)
+    .then(function (data) {
+      res.status(200)
+        .json({
+          status: 'success',
+          regimens: data,
+          message: 'Retrieved ALL Regimens for Patient ' + patid
+        });
+    })
+    .catch(function (err) {
+      res.status(500);
+      //return next(err);
+    });
+}
+
 function sendResponse(req, res, next) {
 
   req.app.get('db').regimens.update({id: card_id, card: card}, function(err, result){
@@ -165,6 +184,7 @@ module.exports = {
   upsertRegimen: upsertRegimen,
   updateDoctorStatus: updateDoctorStatus,
   deleteRegimen: deleteRegimen,
+  getRegimens: getRegimens,
   sendResponse: sendResponse
 
 };
