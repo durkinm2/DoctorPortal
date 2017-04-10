@@ -147,6 +147,7 @@ function deleteRegimen(req, res, next) {
 function getRegimens(req, res, next) {
   var patid = parseInt(req.params.pat_id);
   //var docid = parseInt(req.user.id);
+  console.log("api get success");
   db.any('select card, id from regimens where pat_id = $1', patid)
     .then(function (data) {
       res.status(200)
@@ -163,7 +164,7 @@ function getRegimens(req, res, next) {
 }
 
 function sendResponse(req, res, next) {
-
+  console.log("api post success");
   req.app.get('db').regimens.update({id: card_id, card: card}, function(err, result){
     if (err) {
       console.log("Could not send Patient response");

@@ -367,13 +367,13 @@ var reggie = JSON.stringify(regimen);
 	    type: "POST",
 	    dataType: 'json',
 	    data: {test2 : test2, regimen : reggie},
-	    //url: '/users/api/regimenz/' + path_id ,
-			url: 'https://young-stream-87335.herokuapp.com/users/api/respond/' + path_id,
+	    url: '/users/api/regimenz/' + path_id ,
+			//url: 'https://young-stream-87335.herokuapp.com/users/api/respond/' + path_id,
 			success: function (data) {
 	    console.log("Thanks!", data);
 			test2 = data.id;
-			//loadRegimensRequest('/users/api/regimens/' + path_id );
-			loadRegimensRequest('https://young-stream-87335.herokuapp.com/users/api/response/' + path_id);
+			loadRegimensRequest('/users/api/regimens/' + path_id );
+			//loadRegimensRequest('https://young-stream-87335.herokuapp.com/users/api/response/' + path_id);
 
 		}
 	});
