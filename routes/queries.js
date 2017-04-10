@@ -163,18 +163,46 @@ function getRegimens(req, res, next) {
     });
 }
 
+// function sendResponse(req, res, next) {
+//   console.log("api post success");
+//   req.app.get('db').regimens.update({id: card_id, card: card}, function(err, result){
+//     if (err) {
+//       console.log("Could not send Patient response");
+//     } else {
+//       console.log("Patient response sent");
+//       res.json(result);
+//     }
+//   });
+//
+//
+// }
 function sendResponse(req, res, next) {
-  console.log("api post success");
+
+var card = req.body.regimen;
+var pat = parseInt(req.params.pat_id);
+var card_id = req.body.test2;
+
+// if updating card
+if (card_id) {
   req.app.get('db').regimens.update({id: card_id, card: card}, function(err, result){
     if (err) {
-      console.log("Could not send Patient response");
+      console.log("Could not update card");
     } else {
-      console.log("Patient response sent");
+      console.log("Card successfully updated");
       res.json(result);
     }
   });
-
-
+// if creating card
+} else {
+  req.app.get('db').regimens.save({doc_id: req.user.id, pat_id: pat, card: card}, function(err, result){
+    if (err) {
+      console.log("Could not create card");
+    } else {
+      console.log("Card successfully created");
+      res.json(result);
+    }
+  });
+}
 }
 
 
