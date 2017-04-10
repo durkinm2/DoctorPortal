@@ -140,6 +140,6 @@ router.post('/api/regimens/:pat_id', andRestrictTo(2),db2.upsertRegimen);
 router.post('/api/regimenz/:pat_id', andRestrictTo(2), db2.upsertRegimen);
 router.get('/api/regimen/:pat_id', andRestrictTo(2), db2.upsertRegimen);
 router.get('/api/response/:pat_id', db2.getRegimens);
-router.post('/api/response/:pat_id', db2.sendResponse);
+router.post('/api/respond/:pat_id', db2.sendResponse);
 
 module.exports = router;
