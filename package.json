@@ -15,6 +15,7 @@
     "coffee-script": "^1.10.0",
     "connect-assets": "^5.3.2",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.8.3",
     "debug": "~2.2.0",
     "dotenv": "^2.0.0",
     "express": "^4.13.4",
