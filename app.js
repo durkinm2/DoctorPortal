@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var dotenv = require('dotenv');
+var cors = require('cors');
 dotenv.load();
 
 var massive = require("massive");
@@ -107,6 +108,8 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(cors());
 
 app.use('/', routes);
 app.use('/users', users);
