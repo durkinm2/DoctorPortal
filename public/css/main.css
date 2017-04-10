@@ -40,6 +40,26 @@ h1 {
 	transition: .15s ease-in-out;
 }
 
+.card-home-action {
+	height: 15rem;
+	font-size: 14px;
+}
+
+.howto-content {
+	background-color: white;
+}
+
+.card-home-extra {
+	height: 4.5rem;
+	text-align: left;
+}
+
+
+.guide-label {
+	font-size: 18px;
+	font-weight: bold;
+}
+
 .card-clickable:hover {
 	cursor: pointer;
 	background-color: #e3e3e3;
@@ -118,11 +138,11 @@ h1 {
 	margin-top: 75px;
 }
 
-.mr-150 {
+.mr-100 {
 	margin-right: 150px;
 }
 
-.ml-150 {
+.ml-100 {
 	margin-left: 150px;
 }
 
@@ -229,6 +249,10 @@ h1 {
 	/*background-color: rgb(236,238,239);*/
 	/*border: 1px solid #eee;
 	border-radius: 0.25em;*/
+}
+
+.faq-h {
+	color: #0275d8;
 }
 
 .regimen-modal-timeslot-delete {
@@ -391,6 +415,7 @@ input:checked + .slider:before {
 	color: white;
 	font-size: 14px;
 	text-align: left;
+	white-space: pre;
 	/*width: 80px !important;*/
 }
 

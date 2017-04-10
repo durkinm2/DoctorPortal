@@ -122,13 +122,30 @@ router.get('/profile/patients/:pat_id', andRestrictTo(2), db2.getSinglePatient);
 
 router.get('/profile/patients/:pat_id/regimens', andRestrictTo(2),
   function(req, res, next){
-    res.render('regimens', { title: 'Regimens', user: req.user });
+    console.log(req.params);
+    var patid = parseInt(req.params);
+    var results;
+    req.app.get('db').patients.find(patid, function(err,result) {
+      console.log("RESULT", result);
+      results = result;
+    res.render('regimens', { title: 'Regimens', user: results });
+  });
 });
 
 router.get('/profile/patients/:pat_id/reports', andRestrictTo(2),
   function(req, res, next){
     res.render('reports', { title: 'Reports', user: req.user });
 });
+
+router.get('/profile/howtoguide', andRestrictTo(2),
+  function(req, res, next) {
+    res.render('howtoguide', { title: 'How-to Guide', user: req.user});
+  });
+
+router.get('/profile/faq', andRestrictTo(2),
+  function(req, res, next) {
+    res.render('faq', { title: 'FAQ', user: req.user});
+  });
 
 /*----------------------- API ---------------------------*/
 router.get('/api/patients', andRestrictTo(2), db2.getAllPatients);

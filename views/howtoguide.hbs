@@ -1,0 +1,217 @@
+
+    <div class="container-fluid">
+      <div class="row">
+
+        <main class="col-sm-12 pt-3">
+
+          <div class="row">
+            <div class="col-sm-12"><h1 class="mb-3">How-To-Guide</h1></div>
+          </div>
+
+          <div class="container-fluid ml-100 mr-100 mb-60">
+
+            <div class="mb-2 mt-5">
+              <span class="guide-label">Accessing My Patients</span>
+              <hr>
+            </div>
+
+            <div id="accordion-patientguide" role="tablist" aria-multiselectable="true">
+              <div class="card mb-2">
+                <div class="card-header" role="tab" id="heading-patients">
+                  <h5 class="mb-0">
+                    <a data-toggle="collapse" data-parent="#accordion-patientguide" href="#patients" aria-expanded="true" aria-controls="patients">
+                      Patients
+                    </a>
+                  </h5>
+                </div>
+
+                <div id="patients" class="collapse" role="tabpanel" aria-labelledby="heading-patients">
+                  <div class="card-block howto-content">
+                    <ul>
+                      <li>You can access the list of all patients assigned to you by clicking the <b>Patients</b> button located on the <b>Home</b> page.</li>
+                      <li>On this page, the proprietary data for all of your patients is presented in a <b>table</b>. The table allows you to perform
+                      any of the following functions:</li>
+                          <ul>
+                            <li><b>Filtering</b> - Click the <i class="fa fa-th" aria-hidden="true"></i> icon to filter the table results by any of the column headers.</li>
+                            <li><b>Searching</b> - Enter a search query into the <b>search</b> bar; the search will be performed as you type. This search is performed on all <b>visible</b> cells in the table.</li>
+                            <li><b>Sorting</b> - Click on either of the column headers in order to alternate between <b>ascending</b> and <b>descending</b> order.</li>
+                          </ul>
+                      <li>In order to view the <b>profile</b> of a patient (which includes their regimens and reports), select their corresponding <b>row entry</b> in the table.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-2">
+                <div class="card-header" role="tab" id="heading-profile">
+                  <h5 class="mb-0">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion-patientguide" href="#patient-profile" aria-expanded="false" aria-controls="patient-profile">
+                      Patient Profiles
+                    </a>
+                  </h5>
+                </div>
+                <div id="patient-profile" class="collapse" role="tabpanel" aria-labelledby="heading-profile">
+                  <div class="card-block howto-content">
+                    <ul>
+                      <li>
+                        A profile displays all of the available information about a patient. In addition, you can access the regimens or reports of a patient
+                        from this page by clicking either <b>Regimens</b> or <b>Reports</b>.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-2 mt-5">
+                <span class="guide-label">Regimen & Report Management</span>
+                <hr>
+            </div>
+
+            <div id="accordion-regimens" role="tablist" aria-multiselectable="true">
+              <div class="card mb-2">
+                <div class="card-header" role="tab" id="heading-regimens">
+                  <h5 class="mb-0">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion-regimens" href="#regimens" aria-expanded="false" aria-controls="regimens">
+                      Regimens
+                    </a>
+                  </h5>
+                </div>
+                <div id="regimens" class="collapse" role="tabpanel" aria-labelledby="heading-regimens">
+                  <div class="card-block howto-content">
+                    <ul>
+                      <li>You can manage the regimens of a patient from the <b>Regimens</b> page. From here, you can:
+                        <ul>
+                          <li>Create a new regimen by clicking the <button type="button" class="btn btn-primary btn-sm" style="color: white"><i class="fa fa-plus"></i> Create New</button> button.</li>
+                          <li>Make changes to the details of an existing regimen.
+                            <ul>
+                              <li><b>Note:</b> You can only make changes to the timeslots of dates that have <b>not yet occured</b>. You can, however, make changes to the medication name,
+                              start date (if has not already passed), end date, and dosage instructions.</li>
+                            </ul>
+                          </li>
+                          <li>Delete a regimen.</li>
+                          <li>View the details of a past (already completed) regimen.</li>
+                        </ul>
+                      </li>
+                      <li>If no regimens exist in either the <b>Current Regimens</b> or <b>Past Regimens</b> sections, you will see a <span style="color: #cccccc"><i class="fa fa-ban" aria-hidden="true"></i> Nothing to show</span> label.</li>
+                    </ul>
+                    <ul>
+                      <li>There's a few things about the regimen creation interface you should know before getting started:</li>
+                      <ul>
+                        <li>You must have each of the following fields in order to save a regimen:</li>
+                        <ul>
+                          <li>A <b>medication</b> name.</li>
+                          <li>A <b>start</b> and <b>end date</b>.</li>
+                          <ul>
+                            <li><b>Note:</b> Your start date must be on or before your end date.</li>
+                          </ul>
+                          <li>At least one non-empty <b>timeslot</b> across the entire selected date span.</li>
+                        </ul>
+                        <li>Any date that has already passed will be <b>disabled</b>, in which you cannot add or remove any of its timeslots.</li>
+                        <li>If you choose to start a regimen on <b>today's date</b>, the earliest time you can set for the regimen is the an hour ahead of the current time. This is important
+                        because the disablement of past times will include those that have occured on today's date, up until an hour ahead of the current time.
+                        <ul>
+                          <li>So,
+                        if you decide to create a timeslot scheduled on today's date, exactly 1 hour ahead of the current time, that timeslot will already be disabled
+                        if you attempt to make another edit to that regimen after saving it. Because of this, please be cautious when creating timeslots (it's generally
+                        a good idea to avoid creating a regimen that starts on today's date if you expect that you will have to go back and make changes on the same day).</li>
+                        </ul>
+                        </li>
+                        <li>You can replicate a created week schema (its timeslots and values) in a regimen by clicking
+                        the <b>Replicate Week</b> checkbox. This will replicate all of the timeslot data you have created for the selected replication week,
+                        and will apply that data to all successive dates and timeslots for the remainder of the selected date span.</li>
+                      </ul>
+                      <li>If you have any questions about the <b>Regimens</b> page, please visit the <a href="/html/faq.html">FAQ</a> page.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" role="tab" id="heading-reports">
+                  <h5 class="mb-0">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion-regimens" href="#reports" aria-expanded="false" aria-controls="reports">
+                      Reports
+                    </a>
+                  </h5>
+                </div>
+                <div id="reports" class="collapse" role="tabpanel" aria-labelledby="heading-reports">
+                  <div class="card-block howto-content">
+                    <ul>
+                      <li>Each regimen that you have created contains a <b>report</b>. A <b>report</b> shows a patient's response to each of timeslots that you have scheduled in a regimen.
+                      These responses will be displayed in a table according to their scheduled <b>date</b>.</li>
+                      There are <b>3</b> types of responses:
+                      <ul>
+                        <li><b>YES</b> - The patient responded 'YES' to taking their medication at the scheduled time in the regimen.</li>
+                        <li><b>NO</b> - The patient responded 'NO' to taking their medication at the scheduled time in the regimen.</li>
+                        <li><b>MISST</b> - The patient missed their medication, and have yet to respond (they have 12 hours from the original scheduled time to respond). This is known
+                        as a temporary miss.</li>
+                        <li><b>MISSP</b> - The patient missed their medication and did not respond within 12 hours of the original scheduled time and no longer have a chance to respond.
+                        This is known as a permanent miss.</li>
+                        <li><b>Note:</b> A table cell without a response simply means the time and date for that response has yet to occur.</li>
+                      </ul>
+                      <li>You can scroll through the table <b>horizontally</b> using either the <button type="button" class="btn btn-sm btn-secondary">Left</button> or
+                      <button type="button" class="btn btn-sm btn-secondary">Left</button> buttons.</li>
+                      <li>If you would like to save the information found in the table, you can click the <b>Export As</b> dropdown to select your export file format, and click
+                      the <button type="button" class="btn btn-primary btn-sm" style="color: white"><i class="fa fa-download"></i> Export</button> button.</li>
+                      <li>You can choose from any of the following file-types to export as:</li>
+                      <ul>
+                        <li>PDF</li>
+                        <li>Excel (XLSX)</li>
+                        <li>CSV</li>
+                        <li>TXT</li>
+                      </ul>
+                      <li>In addition to this, you will find a <b>doughnut chart</b> to the right of the table, outlining the total count of response types for the selected regimen report.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-2 mt-5">
+                <span class="guide-label">Using the Medication Database</span>
+                <hr>
+            </div>
+
+            <div id="accordion-medibase" role="tablist" aria-multiselectable="true">
+              <div class="card mb-2">
+                <div class="card-header" role="tab" id="headingThree">
+                  <h5 class="mb-0">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion-medibase" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      MediBase
+                    </a>
+                  </h5>
+                </div>
+                <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                  <div class="card-block howto-content">
+                    <ul>
+                      <li>
+                        The MediBase page provides search access to the OpenFDA Medical Database. This allows you to search and find the specfics
+                        of any medication. You can perform a search using either of the 3 criteria:
+                        <ul>
+                          <li><b>Brand Name - </b>The traditional or generic name for a medication (i.e. Motrin)</li>
+                          <li><b>Substance Name - </b>A substance that is found in a particular medication (i.e. Acetaminophen)</li>
+                          <li><b>Manufacturer Name - </b>The manufacturer for the medication (i.e. Johnson & Johnson)</li>
+                        </ul>
+                      </li>
+                      <li>You can search for up to <b>100 results</b> at a time. Once you have completed your search, click on any of the <b>search result cells</b> in
+                      order to view the details of that medication.</li>
+                      <li>When you select a medication cell to view, you are presented with the following information:</li>
+                      <ul>
+                        <li>Purpose</li>
+                        <li>Usage</li>
+                        <li>Substance</li>
+                        <li>Manufacturer</li>
+                        <li>Product Type</li>
+                        <li>Route</li>
+                        <li>Product NDC (National Drug Code)</li>
+                      </ul>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </main>
+      </div>
+    </div>

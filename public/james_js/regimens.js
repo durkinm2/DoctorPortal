@@ -215,7 +215,7 @@ function displayLoadedTimeslots(date_time_combos) {
 						if (timeslot_date.setHours(hour, minutes) < now) {
 							$(new_timeslot_input).prop('disabled', true);
 						} else {
-							var hour_upperbound = moment(now).get('hour') + 1 // skip to the next hour
+							var hour_upperbound = moment(now).get('hour'); // skip to the next hour
 							var day_period = hour_upperbound >= 12 ? 'pm' : 'am';
 
 							$(new_timeslot_input).timepicker('option', {
@@ -370,7 +370,7 @@ var reggie = JSON.stringify(regimen);
 	    url: '/users/api/regimenz/' + path_id ,
 			//url: 'https://young-stream-87335.herokuapp.com/users/api/respond/' + path_id,
 			success: function (data) {
-	    console.log("Thanks!", data);
+	    console.log("Thanks! Post request sent: ", data);
 			test2 = data.id;
 			loadRegimensRequest('/users/api/regimens/' + path_id );
 			//loadRegimensRequest('https://young-stream-87335.herokuapp.com/users/api/response/' + path_id);
@@ -515,7 +515,7 @@ function handler_addtime_click(event) {
 			var now = moment();
 
 			if ($(selected_date).text() === now.format('MM/DD/YYYY')) {
-				var hour_upperbound = now.get('hour') + 1 // skip to the next hour
+				var hour_upperbound = now.get('hour'); // skip to the next hour
 				var day_period = hour_upperbound >= 12 ? 'pm' : 'am';
 
 				$(new_timeslot_input).timepicker('option', {

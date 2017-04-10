@@ -19,10 +19,12 @@ function hideReportsOverivew(event) {
 	if ($(event.currentTarget).hasClass('regimen-past')) regimenToReport = patientRegimens_past[$('.regimen-past').index(this)];
 	else regimenToReport = patientRegimens_current[$('.regimen-current').index(this)];
 
+  console.log(regimenToReport.card);
+
 	$('#reports-overview').fadeOut(500, function() {
 		$('#table-current-report').bootstrapTable();
 		$('#table-current-report').empty();
-		loadSelectedReport(regimenToReport);
+		loadSelectedReport(regimenToReport.card);
 	});
 }
 

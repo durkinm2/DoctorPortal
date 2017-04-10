@@ -146,6 +146,7 @@ function deleteRegimen(req, res, next) {
 
 function getRegimens(req, res, next) {
   var patid = parseInt(req.params.pat_id);
+
   //var docid = parseInt(req.user.id);
   console.log("api get success");
   db.any('select card, id from regimens where pat_id = $1', patid)
