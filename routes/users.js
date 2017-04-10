@@ -9,6 +9,7 @@ var connectRoles = require('connect-roles');
 var roleType;
 var roleid;
 
+
 /* GET users listing. */
 router.get('/login', ensureLoggedOut,
   function(req, res){

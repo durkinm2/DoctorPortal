@@ -4,7 +4,8 @@ var options = {
 };
 
 var pgp = require('pg-promise')(options);
-var db = pgp(process.env.DATABASE_URL + "?ssl=true");
+//var db = pgp(process.env.DATABASE_URL + "?ssl=true");
+var db = pgp(process.env.DATABASE_URL);
 
 
 function getAllPatients(req, res, next) {

@@ -11,7 +11,8 @@ var massive = require("massive");
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
-var connectionString = process.env.DATABASE_URL + "?ssl=true";
+//var connectionString = process.env.DATABASE_URL + "?ssl=true";
+var connectionString = process.env.DATABASE_URL;
 var massiveInstance = massive.connectSync({connectionString : connectionString});
 
 var app = express();
