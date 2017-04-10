@@ -682,9 +682,9 @@ function handler_regimen_hover(event, hideDeleteButton) {
 // .................................................................................................. //
 
 $(document).ready(function() {
-	loadRegimensRequest('	https://www.doctorportal.solutions/users/api/response/' + path_id );
+//	loadRegimensRequest('	https://www.doctorportal.solutions/users/api/response/' + path_id );
 
-  //loadRegimensRequest('/users/api/regimens/' + path_id );
+  loadRegimensRequest('/users/api/regimens/' + path_id );
 	//refreshRegimens('/users/api/regimens/' + path_id);
 	// try and load datepickers only once, and just use changedate to mess with vals
 	$('#regimen-datepicker-startdate').datepicker({
