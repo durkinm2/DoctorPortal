@@ -14,7 +14,6 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var connectionString = process.env.DATABASE_URL + "?ssl=true";
-//var connectionString = process.env.DATABASE_URL;
 var massiveInstance = massive.connectSync({connectionString : connectionString});
 
 var app = express();
@@ -66,7 +65,6 @@ function(username, password, done) {
   });
 }));
 
-
 // Store user information into session
 passport.serializeUser(function(user, done) {
 
@@ -92,7 +90,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 app.use(cors());
 
-// uncomment after placing your favicon in /public
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -123,14 +120,6 @@ app.use(function(req, res, next) {
 
   next(err);
 });
-
-// app.use(function(req, res, next) {
-//   var err = new Error('Unauthorized');
-//   err.status = 403;
-//   err.layout = 'error403';
-//
-//   next(err);
-// });
 
 // error handlers
 // development error handler

@@ -9,15 +9,7 @@ var connectRoles = require('connect-roles');
 var roleType;
 var roleid;
 
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
 
-
-
-/* GET users listing. */
 router.get('/login', ensureLoggedOut,
   function(req, res){
     res.render('login', {layout:null});
@@ -25,7 +17,7 @@ router.get('/login', ensureLoggedOut,
 
 router.post('/login', function(req, res, next){
 /* This is where authentication happens
- * If authentication fails, remains on login page
+ * If authentication fails, user remains on login page
  * If authentication succeeds, gets role type for authorization purposes
  */
   passport.authenticate('local', function(err, user, info) {
@@ -74,7 +66,7 @@ function ensureLoggedOut(req, res, next) {
   }
 }
 
-// Callback to authorize a route by role
+// Callback function to authorize a route by role
 function andRestrictTo(role) {
   return function(req, res, next) {
     if(!req.user) {
@@ -82,13 +74,12 @@ function andRestrictTo(role) {
     } else if (roleType === role) {
       next();
     } else {
-    //  next(new Error('Unauthorized'));
-    res.render('error403', {message: "Unauthorized", type : 403, layout : 'error403'});
-  }
+      res.render('error403', {message: "Unauthorized", type : 403, layout : 'error403'});
+    }
   }
 }
 
-// Routes
+// ............................... Routes ............................. //
 
 // router.all('/admin/*', andRestrictTo("administrator"));
 router.get('/admin', andRestrictTo(1),
@@ -122,20 +113,20 @@ router.get('/profile/patients/:pat_id', andRestrictTo(2), db2.getSinglePatient);
 
 router.get('/profile/patients/:pat_id/regimens', andRestrictTo(2),
   function(req, res, next){
-    console.log(req.params);
-    var patid = parseInt(req.params);
-    var results;
-    req.app.get('db').patients.find(patid, function(err,result) {
-      console.log("RESULT", result);
-      results = result;
-    res.render('regimens', { title: 'Regimens', user: results });
+      console.log(req.params);
+      var patid = parseInt(req.params);
+      var results;
+      req.app.get('db').patients.find(patid, function(err,result) {
+        console.log("RESULT", result);
+        results = result;
+      res.render('regimens', { title: 'Regimens', user: results });
+    });
   });
-});
 
 router.get('/profile/patients/:pat_id/reports', andRestrictTo(2),
   function(req, res, next){
     res.render('reports', { title: 'Reports', user: req.user });
-});
+  });
 
 router.get('/profile/howtoguide', andRestrictTo(2),
   function(req, res, next) {
@@ -156,6 +147,7 @@ router.post('/api/regimen/:pat_id', andRestrictTo(2), db2.deleteRegimen);
 router.post('/api/regimens/:pat_id', andRestrictTo(2),db2.upsertRegimen);
 router.post('/api/regimenz/:pat_id', andRestrictTo(2), db2.upsertRegimen);
 router.get('/api/regimen/:pat_id', andRestrictTo(2), db2.upsertRegimen);
+// for mirror
 router.get('/api/response/:pat_id', db2.getRegimens);
 router.post('/api/respond/:pat_id', db2.sendResponse);
 

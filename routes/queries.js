@@ -5,9 +5,8 @@ var options = {
 
 var pgp = require('pg-promise')(options);
 var db = pgp(process.env.DATABASE_URL + "?ssl=true");
-//var db = pgp(process.env.DATABASE_URL);
 
-
+// Gets all patients belonging to a doctor
 function getAllPatients(req, res, next) {
   var docid = (req.user.id);
   db.any('select * from patients where doc_id = $1', docid)
@@ -24,6 +23,7 @@ function getAllPatients(req, res, next) {
     });
 }
 
+// Gets a single patient when there is a valid patient ID in the URL
 function getSinglePatient(req, res, next){
   var patid = parseInt(req.params.pat_id);
   var docid = parseInt(req.user.id);
@@ -48,7 +48,7 @@ function getSinglePatient(req, res, next){
   });
 }
 
-
+// Gets all doctors for an admin profile
 function getAllDoctors(req, res, next) {
   db.any('select acct_active, active, fname, lname, id, username from users')
     .then(function (data) {
@@ -64,6 +64,7 @@ function getAllDoctors(req, res, next) {
     });
 }
 
+// Gets all regimens for a single patient
 function getAllRegimens(req, res, next) {
   var patid = parseInt(req.params.pat_id);
   var docid = parseInt(req.user.id);
@@ -82,12 +83,13 @@ function getAllRegimens(req, res, next) {
     });
 }
 
+// Creates a new regimen or updates an existing one
 function upsertRegimen(req, res, next){
   var card = req.body.regimen;
   var pat = parseInt(req.params.pat_id);
   var card_id = req.body.test2;
 
-// if updating card
+// if updating a card
   if (card_id) {
     req.app.get('db').regimens.update({id: card_id, card: card}, function(err, result){
       if (err) {
@@ -97,7 +99,7 @@ function upsertRegimen(req, res, next){
         res.json(result);
       }
     });
-// if creating card
+// if creating a card
   } else {
     req.app.get('db').regimens.save({doc_id: req.user.id, pat_id: pat, card: card}, function(err, result){
       if (err) {
@@ -110,6 +112,24 @@ function upsertRegimen(req, res, next){
   }
 }
 
+// Deletes an existing current regimen
+function deleteRegimen(req, res, next) {
+  var card = req.body.regimen;
+  var card_id = req.body.test3;
+
+  req.app.get('db').regimens.destroy({id: card_id}, function(err, result){
+    //Array containing the destroyed record is returned
+    if (err) {
+      console.log("Could not delete card");
+    } else{
+      console.log("Card successfully deleted");
+      res.json(result);
+    }
+  });
+
+}
+
+// Enables or disables a doctor's account
 function updateDoctorStatus(req, res, next) {
   var docid = parseInt(req.body.acct);
   var newStatus = req.body.option;
@@ -127,27 +147,10 @@ function updateDoctorStatus(req, res, next) {
     });
 }
 
-function deleteRegimen(req, res, next) {
-  var card = req.body.regimen;
-  var card_id = req.body.test3;
-
-  req.app.get('db').regimens.destroy({id: card_id}, function(err, result){
-    //Array containing the destroyed record is returned
-    if (err) {
-      console.log("Could not delete card");
-    } else{
-      console.log("Card successfully deleted");
-      res.json(result);
-    }
-  });
-
-}
-
-
+//
 function getRegimens(req, res, next) {
   var patid = parseInt(req.params.pat_id);
 
-  //var docid = parseInt(req.user.id);
   console.log("api get success");
   db.any('select card, id from regimens where pat_id = $1', patid)
     .then(function (data) {
@@ -164,19 +167,6 @@ function getRegimens(req, res, next) {
     });
 }
 
-// function sendResponse(req, res, next) {
-//   console.log("api post success");
-//   req.app.get('db').regimens.update({id: card_id, card: card}, function(err, result){
-//     if (err) {
-//       console.log("Could not send Patient response");
-//     } else {
-//       console.log("Patient response sent");
-//       res.json(result);
-//     }
-//   });
-//
-//
-// }
 function sendResponse(req, res, next) {
 
 var card = req.body.regimen;

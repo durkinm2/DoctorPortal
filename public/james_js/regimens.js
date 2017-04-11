@@ -344,23 +344,15 @@ function saveRegimen() {
 		dosage_instructions: dosage_instructions,
 	}
 
-
-
-
 	$('#regimen-modal').modal('toggle');
 
-// if(card_id.id) {
-// 	test2 = patientRegimens_current[card_id].id;
-//
-// }
 if(isEditingRegimen){
 		test2 = patientRegimens_current[editingIndex].id;
 }
 
 var reggie = JSON.stringify(regimen);
+
 // POST request to create or update card
-
-
 	console.log(test2);
 	$.ajax
 	({
