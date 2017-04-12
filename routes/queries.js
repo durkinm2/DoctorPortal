@@ -147,7 +147,7 @@ function updateDoctorStatus(req, res, next) {
     });
 }
 
-//
+
 function getRegimens(req, res, next) {
   var patid = parseInt(req.params.pat_id);
 

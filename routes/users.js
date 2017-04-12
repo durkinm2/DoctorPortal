@@ -26,7 +26,7 @@ router.post('/login', function(req, res, next){
        return next(err);
      }
     if (!user) {
-       return res.redirect('/login');
+       return res.redirect('login');
      }
 // method of authorization subject to change, works fine though
     req.logIn(user, function(err) {

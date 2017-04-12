@@ -27,6 +27,8 @@ var pg = require('pg').native;
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
+
+// User authentication starts here
 passport.use( new LocalStrategy({
   usernameField: 'username',
   passwordField: 'password'
@@ -44,6 +46,10 @@ function(username, password, done) {
 
       if (err) {
         console.log("Database error");
+        return done(err);
+      }
+      if (result.rowCount < 1) {
+        console.log("Bad username or password");
         return done(err);
       }
       if (!result.rows[0].acct_active) {
