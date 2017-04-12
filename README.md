@@ -1,5 +1,6 @@
+<<<<<<< HEAD
 # DoctorPortal
-## https://www.doctorportal.solutions/users/login
+## https://www.doctorportal.solutions/
 
 todo:
 -fwd forgot password requests to domain email
