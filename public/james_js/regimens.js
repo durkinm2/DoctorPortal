@@ -316,14 +316,37 @@ function saveRegimen() {
 
 	var date_time_combos = new Object();
 	var responses = new Object();
+	var responsesOld;
+
+	if (isEditingRegimen) responsesOld = patientRegimens_current[editingIndex].card.responses;
 
 	for (var i = 0; i < selected_dates.length; i++) {
 		var times = $(selected_dates[i]).find('.regimen-modal-timeslot');
 		var curr_date = $($(selected_dates[i]).children()[0]).text();
 		var curr_timeslots = [];
+		var curr_response_timeslots = [];
 
 		for (var j = 0; j < times.length; j++) {
-			if (isValidTimeslot(times[j].value)) curr_timeslots.push(times[j].value);
+			if (isValidTimeslot(times[j].value)) {
+				curr_timeslots.push(times[j].value);
+				if (responsesOld && responsesOld[curr_date]) {
+					var oldResponsesForDate = responsesOld[curr_date];
+					for (var k = 0; k < oldResponsesForDate.length; k++) {
+						var test_split = oldResponsesForDate[k].split('-');
+
+						if (test_split.length > 1) {
+							if (test_split[0] === times[j].value) {
+									curr_response_timeslots.push(oldResponsesForDate[k]);
+							}
+						} else {
+							curr_response_timeslots.push(times[j].value);
+						}
+
+					}
+				} else {
+					curr_response_timeslots.push(times[j].value);
+				}
+			}
 			else {
 				updateWarningLabel($('#regimen-modal-weekschema-container'), 'One or more invalid timeslots');
 				return;
@@ -331,7 +354,7 @@ function saveRegimen() {
 		}
 
 		date_time_combos[curr_date] = curr_timeslots;
-		responses[curr_date] = curr_timeslots;
+		responses[curr_date] = curr_response_timeslots;
 	}
 
 	med_name = med_name.charAt(0).toUpperCase() + med_name.slice(1);
@@ -347,9 +370,9 @@ function saveRegimen() {
 		responses: responses
 	}
 
-	// var response = {
-	//
-	// }
+	var response = {
+
+	}
 
 
 	$('#regimen-modal').modal('toggle');
