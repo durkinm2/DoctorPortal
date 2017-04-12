@@ -347,6 +347,15 @@ function saveRegimen() {
 		responses: responses
 	}
 
+	var response = {
+		med_name : med_name,
+		start_date : start_date_wrapper.format('MM/DD/YYYY'),
+		end_date : end_date_wrapper.format('MM/DD/YYYY'),
+		date_time_combos : date_time_combos,
+		dosage_instructions: dosage_instructions,
+		responses: responses
+	}
+
 	$('#regimen-modal').modal('toggle');
 
 if(isEditingRegimen){
@@ -361,7 +370,7 @@ var reggie = JSON.stringify(regimen);
 	({
 	    type: "POST",
 	    dataType: 'json',
-	    data: {test2 : test2, regimen : reggie},
+	    data: {test2 : test2, regimen : reggie, response: response},
 	    url: '/users/api/regimenz/' + path_id ,
 			//url: 'https://young-stream-87335.herokuapp.com/users/api/respond/' + path_id,
 			success: function (data) {

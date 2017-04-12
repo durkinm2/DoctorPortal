@@ -169,11 +169,11 @@ function getRegimens(req, res, next) {
 
 function sendResponse(req, res, next) {
 
-var card = req.body.regimen;
+var card = req.body.card;
 var pat = parseInt(req.params.pat_id);
-var card_id = req.body.test2;
+var card_id = req.body.card_id;
 //var response = req.body.responses;
-
+console.log("card", card, "card_id", card_id);
 // if updating card
 if (card_id) {
   req.app.get('db').regimens.update({id: card_id, card: card}, function(err, result){
@@ -186,20 +186,9 @@ if (card_id) {
   });
 } else {
   console.log("Error sending response");
-  
-}
-// if creating card
 
-// else {
-//   req.app.get('db').regimens.save({doc_id: req.user.id, pat_id: pat, card: card}, function(err, result){
-//     if (err) {
-//       console.log("Could not create card");
-//     } else {
-//       console.log("Card successfully created");
-//       res.json(result);
-//     }
-//   });
-// }
+}
+
 }
 
 
