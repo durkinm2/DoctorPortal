@@ -339,7 +339,7 @@ function saveRegimen() {
 									curr_response_timeslots.push(oldResponsesForDate[k]);
 							}
 						} else {
-							curr_response_timeslots.push(times[j].value);
+							// curr_response_timeslots.push(times[j].value);
 						}
 
 					}
