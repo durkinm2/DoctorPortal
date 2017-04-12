@@ -168,13 +168,12 @@ function getRegimens(req, res, next) {
 }
 
 function sendResponse(req, res, next) {
-
 var card = req.body.card;
-var pat = parseInt(req.params.pat_id);
 var card_id = req.body.card_id;
-//var response = req.body.responses;
+
 console.log("card", card, "card_id", card_id);
 // if updating card
+
 if (card_id) {
   req.app.get('db').regimens.update({id: card_id, card: card}, function(err, result){
     if (err) {

@@ -346,7 +346,11 @@ function saveRegimen() {
 		dosage_instructions: dosage_instructions,
 		responses: responses
 	}
-	
+
+	// var response = {
+	//
+	// }
+
 
 	$('#regimen-modal').modal('toggle');
 
