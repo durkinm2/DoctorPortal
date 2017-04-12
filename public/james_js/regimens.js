@@ -315,6 +315,7 @@ function saveRegimen() {
 	// end fields check
 
 	var date_time_combos = new Object();
+	var responses = new Object();
 
 	for (var i = 0; i < selected_dates.length; i++) {
 		var times = $(selected_dates[i]).find('.regimen-modal-timeslot');
@@ -330,6 +331,7 @@ function saveRegimen() {
 		}
 
 		date_time_combos[curr_date] = curr_timeslots;
+		responses[curr_date] = curr_timeslots;
 	}
 
 	med_name = med_name.charAt(0).toUpperCase() + med_name.slice(1);
@@ -342,6 +344,7 @@ function saveRegimen() {
 		end_date : end_date_wrapper.format('MM/DD/YYYY'),
 		date_time_combos : date_time_combos,
 		dosage_instructions: dosage_instructions,
+		responses: responses
 	}
 
 	$('#regimen-modal').modal('toggle');
