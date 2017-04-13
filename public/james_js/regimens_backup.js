@@ -277,18 +277,6 @@ function loadSelectedRegimen(selectedRegimen, alreadyEnded) {
 	showModal();
 }
 
-function checkOldTimeslots(oldResponsesTimeSlot, timeValue) {
-	for (var k = 0; k < oldResponsesTimeSlot.length; k++) {
-		var test_split = oldResponsesTimeSlot[k].split('-');
-
-		if (test_split.length > 1 && test_split[0] === timeValue) {			
-			return oldResponsesTimeSlot[k];
-		}
-
-	}
-	return timeValue;
-}
-
 function saveRegimen() {
 
 	var med_name = $('#medication-name').val();
@@ -342,8 +330,19 @@ function saveRegimen() {
 			if (isValidTimeslot(times[j].value)) {
 				curr_timeslots.push(times[j].value);
 				if (responsesOld && responsesOld[curr_date]) {
-					var potentialTimeslotSave = checkOldTimeslots(responsesOld[curr_date], times[j].value);
-					curr_response_timeslots.push(potentialTimeslotSave);
+					var oldResponsesForDate = responsesOld[curr_date];
+					for (var k = 0; k < oldResponsesForDate.length; k++) {
+						var test_split = oldResponsesForDate[k].split('-');
+
+						if (test_split.length > 1) {
+							if (test_split[0] === times[j].value) {
+									curr_response_timeslots.push(oldResponsesForDate[k]);
+							}
+						} else {
+							curr_response_timeslots.push(times[j].value);
+						}
+
+					}
 				} else {
 					curr_response_timeslots.push(times[j].value);
 				}
