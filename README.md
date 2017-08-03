@@ -1,9 +1,5 @@
-# DoctorPortal
-## https://www.doctorportal.solutions/
 
-todo:  
--fwd forgot password requests to domain email  
--change var names to make sense  
--remove unused middleware  
--take out trash  
--call the plumber  
+# Doctor ![Alt text](/public/images/portal-icon.png) Portal
+### https://www.doctorportal.solutions/ or 
+### https://young-stream-87335.herokuapp.com/
+
